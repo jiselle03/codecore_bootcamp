@@ -1,0 +1,79 @@
+@import url(reset.css);
+@import url('https://fonts.googleapis.com/css?family=Archivo|Rubik&display=swap');
+
+/* 
+
+Colour Guide
+
+  Primary colour: #F2958A;
+  Secondary colour: #F2D0BB;
+
+  Fonts: Archivo, Rubik
+
+*/
+
+body {
+    background-image: linear-gradient(to top, #256fcf 0%, rgba(0, 50, 98, 1) 100%);
+    font-family: 'Archivo', sans-serif;
+    padding: 5em;
+
+}
+
+/* Hyperlink Styles */
+
+a:link {
+    text-decoration: none;
+    color: rgba(0, 50, 98, 1);
+}
+
+a:visited {}
+
+a:hover,
+a:active {
+    text-decoration: underline;
+    color:#f2d0bb;;
+}
+
+/* Typography Styles */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rubik', sans-serif;
+}
+
+h1 {
+    font-size: 4.5em;
+    color:rgba(253, 181, 21, 1);
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 3.5em;
+    color:rgba(224, 158, 25, 1);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 2em;
+    color:rgba(194, 185, 167, 1);
+    margin-bottom: 0.5m;
+}
+
+h4 {
+    font-size: 1.5em;
+    color:rgba(185, 211, 182, 1);
+    margin-top: 0.5em;
+    margin-bottom: 0.75em;
+}
+
+p, ul, li {
+    margin-bottom: 0.5em;
+    color:rgba(188, 155, 106, 1);
+}
+
+li {
+    list-style-type: square;
+    list-style-position: inside;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}

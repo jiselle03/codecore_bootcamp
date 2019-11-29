@@ -21,27 +21,26 @@ const speakingJS = new Book("Speaking JavaScript", ["Dr. Axel Rauschmayer"], 1);
 const theRustProgLang = new Book("The Rust Programming Language", ["Steve Klabnik", "Carol Nichols"],2);
 
 class Library {
+    shelf = [];
     shelve(book) {
-        let shelf = [];
-        shelf.push(book);
-        shelf.sort(function(a, b){
+        this.shelf.push(book);
+        this.shelf.sort(function(a, b){
             let nameA = a.title.toLowerCase()
             let nameB = b.title.toLowerCase()
             if (nameA < nameB) { return -1; }
             if (nameA > nameB) { return 1; }
             return 0;
         })
-        return shelf;
+        return this.shelf;
     }
     findByTitle(keyword) {
         let searchWord = keyword.toLowerCase().split(' ');
-        for (book in this.shelf) {
-            let bookChoices = book.split(' ');
-            if (searchWord === bookChoices) {
-                return book;
-            } else [
+        for (let i = 0; i < this.shelf.length; i++) {
+            if (searchWord === this.shelf[i].title.toLowerCase()) {
+                return this.shelf.title;
+            } else {
                 return `Book not found.`
-            ]
+            }
         }
     }
     list() {
@@ -55,14 +54,14 @@ class Library {
 
 
 const lib = new Library();
-// console.log(lib.shelve(eloquentJS));
 lib.shelve(eloquentJS)
-// lib.shelve(theRustProgLang)
-console.log(lib.shelve(theRustProgLang))
+lib.shelve(theRustProgLang)
+lib.shelve(speakingJS)
+console.log(lib.shelf)
 
 // lib.shelve(speakingJS).shelve(theRustProgLang);
 
-// console.log(lib.findByTitle("eloquent")); // Book {title: "Eloquent Javascript", authors: Array(1), edition: 3}
+console.log(lib.findByTitle("eloquent")); // Book {title: "Eloquent Javascript", authors: Array(1), edition: 3}
 // console.log(lib.findByTitle("Rust")); // Book {title: "The Rust Programming Language", authors: Array(2), edition: 2}
 
 // console.log(lib.list());

@@ -1,0 +1,136 @@
+@import url(reset.css);
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Vollkorn&display=swap');
+/* From google fonts */
+
+/* 
+
+Colour Guide
+
+  Primary colour: #F2958A;
+  Secondary colour: #F2D0BB;
+
+
+From Adobe
+
+    Color Theme Swatches in Hex
+
+    .Graphic-Design-1-hex {
+        color: #03258C;
+    }
+
+    .Graphic-Design-2-hex {
+        color: #021E73;
+    }
+
+    .Graphic-Design-3-hex {
+        color: #F29F05;
+    }
+
+    .Graphic-Design-4-hex {
+        color: #F28705;
+    }
+
+    .Graphic-Design-5-hex {
+        color: #A62317;
+    }
+
+    Color Theme Swatches in RGBA
+
+    .Graphic-Design-1-rgba {
+        color: rgba(2, 37, 140, 1);
+    }
+
+    .Graphic-Design-2-rgba {
+        color: rgba(2, 30, 114, 1);
+    }
+
+    .Graphic-Design-3-rgba {
+        color: rgba(242, 159, 4, 1);
+    }
+
+    .Graphic-Design-4-rgba {
+        color: rgba(242, 135, 4, 1);
+    }
+
+    .Graphic-Design-5-rgba {
+        color: rgba(165, 35, 23, 1);
+}
+
+
+*/
+
+body {
+    background: #F2958A;
+    font-family: 'IBM Plex Sans', sans-serif;
+    padding: 3em;
+}
+
+/* Essential Default Styles */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.hero-image {
+    width: 80vw;
+    margin: 0 auto;
+    /* When an element has a width and the left and right margin is left to auto, the element will be centered;
+    */
+}
+
+/* Hyperlink Styles */
+
+a:link {
+    text-decoration: none;
+    color: #f2d0bb;
+}
+
+a:visited {}
+
+a:hover,
+a:active {
+    text-decoration: underline;
+    color: black;
+}
+
+/* Form Styles */
+
+.submit-button {
+    background: white;
+    width: 6em;
+    border-radius: 1em; /* Rounded corners */
+    border: none;
+    padding: 1em 2em; /* Double the left and right padding from the top and bottom padding for buttons */
+}
+
+/* Typography Styles */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Vollkorn', serif;
+    color: #F2D0BB;
+}
+
+h1 {
+    font-size: 4.209em;
+}
+
+h2 {
+    font-size: 3.157em;
+}
+
+h3 {
+    font-size: 2.369em;
+}
+
+h4 {
+    font-size: 1.777em;
+}
+
+h5 {
+    font-size: 1.333em;
+}
+
+p {
+    margin-bottom: 1em;
+}
