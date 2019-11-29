@@ -31,24 +31,18 @@ class Library {
             if (nameA > nameB) { return 1; }
             return 0;
         })
-        return this.shelf;
     }
     findByTitle(keyword) {
-        let searchWord = keyword.toLowerCase().split(' ');
+        let searchWord = keyword.toLowerCase();
         for (let i = 0; i < this.shelf.length; i++) {
-            if (searchWord === this.shelf[i].title.toLowerCase()) {
-                return this.shelf.title;
-            } else {
-                return `Book not found.`
+            if (this.shelf[i].title.toLowerCase().includes(searchWord)) {
+                return this.shelf[i].title;
             }
         }
+
     }
     list() {
-        let books = [];
-        for (let book in this.shelf) {
-            books.push(`Book {title: ${book.title}, authors: ${book.author}, edition: ${book.edition}}`)
-        }
-        return books;
+        return this.shelf;
     }
 }
 
@@ -57,14 +51,13 @@ const lib = new Library();
 lib.shelve(eloquentJS)
 lib.shelve(theRustProgLang)
 lib.shelve(speakingJS)
-console.log(lib.shelf)
 
 // lib.shelve(speakingJS).shelve(theRustProgLang);
 
 console.log(lib.findByTitle("eloquent")); // Book {title: "Eloquent Javascript", authors: Array(1), edition: 3}
-// console.log(lib.findByTitle("Rust")); // Book {title: "The Rust Programming Language", authors: Array(2), edition: 2}
+console.log(lib.findByTitle("Rust")); // Book {title: "The Rust Programming Language", authors: Array(2), edition: 2}
 
-// console.log(lib.list());
+console.log(lib.list());
 // [
 //   Book {title: "Eloquent Javascript", authors: Array(1), edition: 3},
 //   Book {title: "The Rust Programming Language", authors: Array(2), edition: 2},
