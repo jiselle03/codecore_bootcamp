@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Staatliches|Thasadith');
+@import url('reset.css');
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+body {
+    background: hotpink;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+header {
+    display: flex; /* Immediate parent must have display: flex */
+    flex-direction: row;
+    align-items: center;
+    height: 5em;
+    background: blue;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.branding {
+    background: lightblue;
+    height: 2em;
+    width: 40%;
+}
+
+.logo {
+    height: 3em;
+    width: 6em;
+}
+
+.nav{
+    background: yellow;
+    padding: 1em;
+    width: 60%;
+}
+
+.main {
+    flex: 1; /* takes up the rest of the space, the higher the number, the more space it takes */
+    /*    padding: 1em;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: orangered;
+    padding: 2em;
+    width: 33.33333%;
+    border: 1px solid white;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    background: pink;
+}
+
+.pullquote {
+    flex: 1;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.footer {
+    background: pink;
+    height: 5em;
+}

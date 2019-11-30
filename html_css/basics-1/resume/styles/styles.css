@@ -1,5 +1,5 @@
 @import url(reset.css);
-@import url('https://fonts.googleapis.com/css?family=Archivo|Arvo&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Arvo|Roboto:300,400,400i,700&display=swap');
 
 /* 
 
@@ -9,7 +9,7 @@ Colour Guide
   Secondary colour: #F2D0BB;
 
   font-family: 'Arvo', serif;
-  font-family: 'Archivo', sans-serif;
+  font-family: 'Roboto', sans-serif;
 
 */
 
@@ -20,7 +20,6 @@ body {
     background-size:25vw;
     background-position: top right;
     background-attachment: fixed;
-    font-family: 'Archivo', sans-serif;
     padding: 5em 18em 5em 5em;
 
 }
@@ -29,13 +28,13 @@ body {
 
 a:link, a:visited {
     text-decoration: none;
-    color:rgba(188, 155, 106, 1);
+    color:rgba(185, 211, 182, 1);
 }
 
 a:hover,
 a:active {
     text-decoration: underline;
-    color:rgba(185, 211, 182, 1);;
+    color:rgba(188, 155, 106, 1);
 }
 
 /* Typography Styles */
@@ -66,8 +65,10 @@ h3 {
 
 p, ul, li {
     margin-bottom: 0.5em;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color:#ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight:100;
 }
 
 li {
@@ -80,7 +81,7 @@ li {
 }
 
 strong {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 1em;
 }
 

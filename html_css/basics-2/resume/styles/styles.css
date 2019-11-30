@@ -1,0 +1,142 @@
+@import url(reset.css);
+@import url('https://fonts.googleapis.com/css?family=Arvo|Roboto:300,400,400i,700&display=swap');
+
+/* 
+
+Colour Guide
+
+  Primary colour: #F2958A;
+  Secondary colour: #F2D0BB;
+
+  font-family: 'Arvo', serif;
+  font-family: 'Roboto', sans-serif;
+
+*/
+
+body {
+    background-color:rgba(0, 50, 98, 1);
+    background-image: url("../assets/cal.png");
+    background-repeat: no-repeat;
+    background-size:25vw;
+    background-position: top right;
+    background-attachment: fixed;
+    padding: 5em 18em 5em 5em;
+}
+
+/* Hyperlink Styles */
+
+a:link, a:visited {
+    text-decoration: none;
+    color:rgba(185, 211, 182, 1);
+}
+
+a:hover,
+a:active {
+    text-decoration: underline;
+    color:rgba(253, 181, 21, 1);
+}
+
+/* Typography Styles */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arvo', serif;
+}
+
+h1 {
+    font-size: 4.5em;
+    color:rgba(253, 181, 21, 1);
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 2em;
+    color:rgba(224, 158, 25, 1);
+    margin: 0.75em 0.75em;
+}
+
+h3 {
+    font-size: 1.5em;
+    color:rgb(207, 184, 141);
+    margin: 0.75em 0;
+}
+
+p, ul, li, a {
+    margin-top: 0.75em;
+
+    margin-bottom: 0.75;
+    font-size: 1.05em;
+    color:#ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight:100;
+    line-height:1.3;
+}
+
+li {
+    list-style-type: square;
+    list-style-position: outside;
+    margin-left: 1em;
+    line-height:1.3;
+}
+
+strong {
+    font-weight: 400;
+    font-size: 1em;
+}
+
+em {
+    font-style:italic;
+    font-size: 0.75em;
+}
+
+
+/* flex */
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+h2 {
+    width: 30%;
+}
+
+header {
+    height: 12em;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.summary, .languages-skills, .schools, .companies {
+    width: 70%;
+}
+
+.contact-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.contact-list {
+    list-style-type: none;
+}
+
+.contact-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.social-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 10%
+}
