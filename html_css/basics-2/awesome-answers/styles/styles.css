@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Staatliches|Thasadith');
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Thasadith');
 @import url('reset.css');
 
 /* apply a natural box layout model to all elements, but allowing components to change */
@@ -10,11 +10,11 @@ html {
   }
 
 body {
-    background: hotpink;
+    background:rgba(0, 176, 218, 1);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
+    margin: 1em 1em;
 }
 
 /* Responsive Images */
@@ -23,53 +23,64 @@ img {
     height: auto;
 }
 
-header {
-    display: flex; /* Immediate parent must have display: flex */
+.main-header {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    height: 5em;
-    background: blue;
+    height: 4em;
+    background: #d0b1f3;
+}
+
+.menu, .main-footer {
+    font-family: 'Thasadith', sans-serif;
 }
 
 .menu {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-size: 1.5em;
+    margin: 0.5em;
 }
 
 .branding {
-    background: lightblue;
-    height: 2em;
-    width: 40%;
+    height: 3em;
+    width: 10%;
 }
 
 .logo {
     height: 3em;
-    width: 6em;
+    width: 5em;
+}
+
+.logo-questions {
+    height: 5em;
+    width: 6em; 
 }
 
 .nav{
-    background: yellow;
-    padding: 1em;
-    width: 60%;
+    width: 80%;
+    margin: 0 0 0 10em;
 }
 
 .main {
-    flex: 1; /* takes up the rest of the space, the higher the number, the more space it takes */
-    /*    padding: 1em;*/
+    flex: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: center;
 }
 
 .card {
-    background: orangered;
+    background: #d0b1f3;
     padding: 2em;
-    width: 33.33333%;
-    border: 1px solid white;
+    margin: 0.5em;
+    width: 31.33333%;
+    /* border: 1px solid rgba(0, 176, 218, 1); */
     min-height: 50vh;
     display: flex;
     flex-direction: column;
+    font-family: 'Merriweather', sans-serif;
 }
 
 .card-footer {
@@ -78,12 +89,19 @@ header {
     justify-content: space-between;
 }
 
+.card:hover {
+    transition: 0.3s ease-out;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 1);
+    /* horiztonal offset, vertical offset, blur, size */
+    transform: translateY(-2px) scale(1.005) translateZ(0);
+  }  
+
 .social-icons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 50%;
-    background: pink;
+    width: 20%;
+    margin-right: 2em;
 }
 
 .pullquote {
@@ -91,11 +109,64 @@ header {
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 5em;
     font-weight: 700;
+    align-content: center;
+    color: rgb(1, 60, 130);
+    margin: 0.5em;
+}
+
+h3 {
+    font-size: 3em;
+    font-weight: 500;
+    align-content: center;
+    margin: 0.5em 0.5em 0.25em 0.5em;
+    color: rgb(1, 60, 130);
+}
+
+h4 {
+    font-size: 2em;
+    font-weight: 500;
+    align-content: center;
+    margin: 0.5em 0.5em 0.25em 0.5em;
+    color: rgb(1, 60, 130);
 }
 
 .footer {
-    background: pink;
     height: 5em;
+}
+
+.main-quote, .sample-quote {
+    font-family: 'Merriweather', sans-serif;
+    width: 50%;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: rgb(1, 60, 130);
+}
+
+a:hover,
+a:active {
+    color: white;
+}
+
+.asker {
+    color: rgba(0, 50, 98, 1);
+    margin-left: 1.5em;
+}
+
+em {
+    font-style: italic;
+    font-size: 0.5em;
+    margin: 0 0 0 1.6em;
+}
+
+.em-main {
+    font-style: italic;
+    font-size: 0.5em;
+}
+
+button{
+    margin: 1em 2.5em;
 }
