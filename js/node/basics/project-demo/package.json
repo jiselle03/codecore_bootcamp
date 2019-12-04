@@ -1,0 +1,15 @@
+{
+  "name": "project-demo",
+  "version": "1.0.0",
+  "description": "A demo for NPM projects and packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jiselle",
+  "license": "ISC",
+  "dependencies": {
+    "jimp": "^0.9.3",
+    "qrcode": "^1.4.4"
+  }
+}

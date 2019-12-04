@@ -1,0 +1,14 @@
+{
+  "name": "chalker-board",
+  "version": "1.0.0",
+  "description": "Chalker Board Lab",
+  "main": "chalkerBoard.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jiselle",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0"
+  }
+}
