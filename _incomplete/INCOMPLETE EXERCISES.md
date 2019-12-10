@@ -7,7 +7,6 @@ alphaRange.js
 closestNeighbors.js
 
 // js: higher_order_functions
-flatten.js
 pickBy.js
 
 // js: constructors_prototypes
