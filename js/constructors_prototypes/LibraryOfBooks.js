@@ -31,6 +31,7 @@ class Library {
             if (nameA > nameB) { return 1; }
             return 0;
         })
+        return this;
     }
     findByTitle(keyword) {
         let searchWord = keyword.toLowerCase();
@@ -39,7 +40,7 @@ class Library {
                 return this.shelf[i].title;
             }
         }
-
+        return this;
     }
     list() {
         return this.shelf;
@@ -52,14 +53,14 @@ lib.shelve(eloquentJS)
 lib.shelve(theRustProgLang)
 lib.shelve(speakingJS)
 
-// lib.shelve(speakingJS).shelve(theRustProgLang);
+console.log(lib.shelve(speakingJS).shelve(theRustProgLang));
 
 console.log(lib.findByTitle("eloquent")); // Book {title: "Eloquent Javascript", authors: Array(1), edition: 3}
 console.log(lib.findByTitle("Rust")); // Book {title: "The Rust Programming Language", authors: Array(2), edition: 2}
 
 console.log(lib.list());
-// [
-//   Book {title: "Eloquent Javascript", authors: Array(1), edition: 3},
-//   Book {title: "The Rust Programming Language", authors: Array(2), edition: 2},
-//   Book {title: "Speaking JavaScript", authors: Array(1), edition: 1},
-// ]
+[
+  Book {title: "Eloquent Javascript", authors: Array(1), edition: 3},
+  Book {title: "The Rust Programming Language", authors: Array(2), edition: 2},
+  Book {title: "Speaking JavaScript", authors: Array(1), edition: 1},
+]
