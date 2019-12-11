@@ -1,0 +1,31 @@
+<%- include('./partials/header') %>
+    <h1>Car Status</h1>
+
+    <form>
+
+        <div>
+            <label for="year">Car Year</label>
+            <select type="text" name="year" id ="year" required>
+            <% for (let i = 2025; i >= 1950; i--) { %>
+                <option value = "<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <input type="submit" value="Submit">
+        
+    </form>
+
+    <%  if (year > 2019) { %>
+        <h3>That is a future car!</h3>
+    <% } else if (year > 2010) { %>
+        <h3>That is a new car!</h3>
+    <% } else if (year > 1980) { %>
+        <h3>That is an old car!</h3>
+    <% } else if (year >= 1950) { %>
+        <h3>That is a very old car!</h3>
+    <% } else { %>
+        <h3>Pick year!</h3>
+    <% } %>
+
+    <%- include('./partials/footer') %>

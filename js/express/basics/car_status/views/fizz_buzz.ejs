@@ -1,0 +1,29 @@
+<%- include('./partials/header') %>
+    <h1>FizzBuzz</h1>
+
+    <form>
+        
+        <div>
+            <input type="number" name="number1" id ="number1" placeholder="Number 1"><br>
+            <input type="number" name="number2" id ="number2" placeholder="Number 2"><br>
+            <input type="submit" value="Submit"><br>
+
+            <% function fizzBuzz(number1, number2) { %>
+                <% for (let i = 1; i <= 100; i++) { %>
+                    <% if (i % parseInt(number1) === 0 && i % parseInt(number2) === 0) { %>
+                        <p><%= i %> FizzBuzz</p>
+                    <% } else if (i % parseInt(number1) === 0) { %>
+                        <p><%= i %> Fizz</p>
+                    <% } else if (i % parseInt(number2) === 0) { %>
+                        <p><%= i %> Buzz</p>
+                    <% } %>
+                <% } %>
+            <% } %>
+            <% if (number1 !== '' && number2 !== '') { %>
+                <% fizzBuzz(number1, number2)%>
+            <% } %>
+        </div>      
+        
+    </form>
+
+    <%- include('./partials/footer') %>

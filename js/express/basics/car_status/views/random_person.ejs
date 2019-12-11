@@ -1,0 +1,21 @@
+<%- include('./partials/header') %>
+    <h1>Random Winner</h1>
+
+    <form>
+        
+        <div>
+            <textarea name="names" id ="names" placeholder="Enter names here" cols="100" rows=5></textarea><br>
+            <input type="submit" value="Submit"><br>
+
+            <% function winner(names) { %>
+                <% let nameList = names.split(','); %>
+                <% return nameList[Math.floor(Math.random() * nameList.length)]; %>
+            <% } %>
+            <% if (names !== '') { %>
+                <h2>The winner is <%=winner(names)%>!</h2>
+            <% } %>
+        </div>      
+        
+    </form>
+
+    <%- include('./partials/footer') %>
