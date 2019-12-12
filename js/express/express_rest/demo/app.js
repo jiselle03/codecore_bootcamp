@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const methodOverride = require('method-override');
 
 const app = express();
 const posts = require('./api/posts');
@@ -14,6 +15,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(methodOverride((req, res) => {
+  if (req.body && req.body._method) {
+    // Modifies the request object
+    // Changes it from a POST request to whatever the value for the _method was within 
+    // the form that was just submitted
+    const method = req.body._method
+    return method;
+    }
+  })
+);
 
 app.use('/api/v1/posts', posts); // Specify the router URL
 
