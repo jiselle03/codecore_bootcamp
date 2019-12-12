@@ -1,7 +1,7 @@
 // Set the environment
 const environment = process.env.NODE_ENV || 'development';
 // Load exported configs from knexfile.js
-const confic = require('../knexfile');
+const config = require('../knexfile');
 // Grab the environment that you want to connect to
 const environmentConfig = config[environment];
 // Require knex
