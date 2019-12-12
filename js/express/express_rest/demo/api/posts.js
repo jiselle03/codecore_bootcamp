@@ -58,4 +58,24 @@ router.put('/', (req, res, next) => {
     }
 });
 
+router.delete('/:id', isValidId, (req, res) => {
+    queries.delete(req.params.id).then(() => {
+        if (post) {
+            res.json({
+                message: 'Successfuly deleted post'
+            });
+        } else {
+            res.status(404);
+            next(new Error('Record not found'));
+        }
+    });
+});
+
+
+if (post) {
+    res.json(post);
+} else {
+    res.status(404);
+    next(new Error('Record not found'));
+}
 module.exports = router;
