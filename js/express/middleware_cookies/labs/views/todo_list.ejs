@@ -1,0 +1,17 @@
+<%- include('./partials/header') %>
+    <h4>To-Do List</h4>
+
+    <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://picsum.photos/200/100" alt="Card image cap">
+        <div class="card-body">
+            <% for (let obj of reminder) { %>
+                <h5 class="card-title"><%= obj.title %></h5>
+            <p class="card-text"><%= obj.details %></p>
+            <% } %>
+        </div>
+    </div>
+
+    <ul>
+    
+
+ <%- include('./partials/footer') %>

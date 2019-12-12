@@ -1,0 +1,15 @@
+<%- include('./partials/header') %>
+
+<% if (getName) { %> 
+    <% if (getLanguage === 'English') { %> 
+        <h1>Hello <%= getName %>!</h1>    
+    <% } else if (getLanguage === 'French') { %> 
+        <h1>Bonjour <%= getName %>!</h1>
+    <% } else if (getLanguage === 'Spanish') { %>
+        <h1>Hola <%= getName %>!</h1>
+    <% } %>
+<% } else { %>
+    <h1>Home</h1>
+<% } %>
+
+<%- include('./partials/footer') %>

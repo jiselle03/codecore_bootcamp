@@ -1,0 +1,18 @@
+<%- include('./partials/header') %>
+    <h4>Add Task</h4>
+
+    <form method="POST" action="todo_new">
+        
+        <div>
+            <textarea type="title" name="title" id ="title" placeholder="Title" cols =100 rows=1 required></textarea><br>
+        </div>
+
+        <div>
+                <textarea name="details" id ="details" placeholder="Details" cols=100 rows=3 required></textarea><br>
+            </div>
+
+        <input type="submit" value="Submit">
+        
+    </form>
+
+    <%- include('./partials/footer') %>
