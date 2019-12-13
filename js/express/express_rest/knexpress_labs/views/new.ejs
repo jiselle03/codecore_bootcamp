@@ -1,0 +1,15 @@
+<%- include('./partials/header') %>
+
+<h4>New Note</h4>
+
+    <form method="POST" action="new">
+        
+            <div>
+                <textarea name="new" id ="new" placeholder="New note" cols=100 rows=1 required></textarea><br>
+            </div>
+
+        <input type="submit" value="Add">
+        
+    </form>
+
+<%- include('./partials/footer') %>

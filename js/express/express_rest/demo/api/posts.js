@@ -19,11 +19,13 @@ const validPost = post => {
 router.get('/', (req, res) => {
     queries.getAll().then(posts => {
         res.json(posts);
-    });   
+    });
 });
 
 router.get('/:id', isValidId, (req, res) => {
-    const { id } = req.params;
+    const {
+        id
+    } = req.params;
     queries.getOne(id).then(post => {
         if (post) {
             res.json(post);
