@@ -6,7 +6,7 @@ const logger = require('morgan');
 const methodOverride = require('method-override');
 
 const app = express();
-const router = require('./routes/index');
+const router = require('./routes');
 app.use('/notes', router);
 
 // view engine setup

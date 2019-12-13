@@ -3,5 +3,7 @@
 <h4>Note</h4>
 
 <p><%= note.content %></p>
+    <a href="/notes/edit/<%= note.id %>"><button class="btn btn-sm btn-warning" type="submit">Edit</button></a> &nbsp;
+    <input type="hidden" name="_method" value="DELETE"><button class="btn btn-sm btn-danger" type="submit">Delete</button></form>
 
 <%- include('./partials/footer') %>

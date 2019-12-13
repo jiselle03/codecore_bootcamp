@@ -35,53 +35,54 @@ router.get('/:id', isValidId, (req, res) => {
 });
 
 // create
-router.get('/add', function(req, res, next) {
-  res.render('add');
+router.get('new', function(req, res, next) {
+  res.render('new');
+  console.log('HELLO WORLD')
 });
 
-router.post('/add', (req, res, next) => {
+router.post('/new', (req, res, next) => {
     if (validContent(req.body)) {
         queries.create(req.body).then(notes => {
-            res.render('/add');
+            res.redirect('/', { notes });
         });
     } else {
         res.status(400);
         next(new Error('Invalid note'));
     }
-    res.redirect('/notes')
+    res.redirect('notes')
 });
 
 // update/edit
-router.get('/edit', (req, res, next) => {
-    res.render('edit')
+router.get('/edit/:id', (req, res, next) => {
+    let id = req.params.id;
+    queries.getOne(id).then(note => {
+    res.render('edit', { note });
+    });
 });
 
 router.patch('/edit/:id', (req, res, next) => {
     if (validContent(req.body)) {
+        console.log("patch",req.body)
         queries.update(req.params.id, req.body).then(() => {
-            res.json({
-                message: 'Successfully updated note'
-            });
+            res.redirect('/:id');
         });
     } else {
         res.status(400);
         next(new Error('Invalid note'));
     }
-    res.redirect('/');
 });
 
 // delete
 router.delete('/delete', isValidId, (req, res) => {
   console.log('delete action: ', req.params);
-    // queries.delete(req.params.id).then(() => {
-    //     if (note) {
-    //         res.locals.deleteId = note.id;
-
-    //     } else {
-    //         res.status(404);
-    //         next(new Error('Note not found'));
-    //     }
-    // });
+    queries.delete(req.params.id).then(() => {
+        if (note) {
+            
+        } else {
+            res.status(404);
+            next(new Error('Note not found'));
+        }
+    });
     res.redirect('/');
 });
 
