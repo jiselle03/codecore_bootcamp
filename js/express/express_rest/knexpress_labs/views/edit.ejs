@@ -2,7 +2,7 @@
 
 <h4>Edit Note</h4>
 
-    <form method="POST" action="#">
+    <form method="POST" action="<%= note.id %>">
         
             <div>
                 <input type="hidden" name="_method" value="PATCH">
@@ -10,7 +10,7 @@
                 <textarea name="edit" id ="edit" cols=100 rows=1 required><%= note.content %></textarea><br>
             </div>
 
-        <input type="submit" value="update">
+        <input type="submit" value="Update">
         
     </form>
 

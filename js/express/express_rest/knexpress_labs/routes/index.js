@@ -42,14 +42,13 @@ router.get('new', function(req, res, next) {
 
 router.post('/new', (req, res, next) => {
     if (validContent(req.body)) {
-        queries.create(req.body).then(notes => {
-            res.redirect('/', { notes });
+        queries.create(req.body).then(note => {
+            res.redirect('show', { note });
         });
     } else {
         res.status(400);
         next(new Error('Invalid note'));
     }
-    res.redirect('notes')
 });
 
 // update/edit
@@ -61,15 +60,14 @@ router.get('/edit/:id', (req, res, next) => {
 });
 
 router.patch('/edit/:id', (req, res, next) => {
-    if (validContent(req.body)) {
-        console.log("patch",req.body)
-        queries.update(req.params.id, req.body).then(() => {
-            res.redirect('/:id');
-        });
-    } else {
-        res.status(400);
-        next(new Error('Invalid note'));
-    }
+    // if (validContent(req.body)) {
+    //     queries.update(req.params.id, req.body).then(note => {
+    //         // res.redirect('/:id', { note });
+    //     });
+    // } else {
+    //     res.status(400);
+    //     next(new Error('Invalid note'));
+    // }
 });
 
 // delete
