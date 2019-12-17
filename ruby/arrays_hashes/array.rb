@@ -1,4 +1,4 @@
-a = [15, 'Hey', 'Bye', [1, 2, 3]]
+a = [15, "Hey", "Bye", [1, 2, 3]]
 p a[0] # 15
 p a[1] # "Hey"
 
@@ -49,8 +49,8 @@ a1.unshift 1
 p a1
 
 # Turn a string into an array of elements
-string = 'hello codecore students'
-p word_array = string.split(' ')
+string = "hello codecore students"
+p word_array = string.split(" ")
 
 # Turning array to string
 p word_array.join('*')
