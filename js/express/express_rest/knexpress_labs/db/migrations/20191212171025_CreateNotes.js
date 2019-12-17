@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
       table.increments("id");
       table.text("content");
       table.timestamp("createdAt").defaultTo(knex.fn.now());
+      table.timestamp("updatedAt");
     });
   };
   

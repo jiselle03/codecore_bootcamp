@@ -37,7 +37,6 @@ router.get('/:id', isValidId, (req, res) => {
 // create
 router.get('new', function(req, res, next) {
   res.render('new');
-  console.log('HELLO WORLD')
 });
 
 router.post('/new', (req, res, next) => {
