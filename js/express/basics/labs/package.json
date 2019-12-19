@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "start": "nodemon index.js"
   },
   "author": "Jiselle",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "morgan": "^1.9.1",
-    "nodemon": "^2.0.1"
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
