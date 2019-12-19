@@ -7,20 +7,20 @@ def map_over_hash h
     for n in h
         arr << yield(n)
     end
-    p arr
+    arr
 end
 
-map_over_hash({ name: "Cersei", profession: "Queen", mood: "bitter" }) do |key, value|
+p(map_over_hash({ name: "Cersei", profession: "Queen", mood: "bitter" }) do |key, value|
   "Her #{key.to_s} is #{value}"
-end
+end)
 # => ["Her name is Cersei", "Her profession is Queen", "Her mood is bitter"]
 
-map_over_hash({ 2 => 5, 10 => 2, 5 => 6 }) { |key, value| key.to_s * value }
+p(map_over_hash({ 2 => 5, 10 => 2, 5 => 6 }) { |key, value| key.to_s * value })
 # => [ "22222", "1010", "555555" ]
 
-for key, value in {a: 1, b: 2, c: 3, d: 4}
+p(for key, value in {a: 1, b: 2, c: 3, d: 4}
   puts "Key is #{key} and value is #{value}"
-end
+end)
 
 # Key is a and value is 1
 # Key is b and value is 2

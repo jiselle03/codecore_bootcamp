@@ -8,19 +8,19 @@ def reduce arr, val
     arr.each do |n|
         output = yield(output, n)
     end
-    p output
+    output
 end
 
-reduce([1, 2, 3, 4, 5, 6], 0) { |total, v| total + v } # => 21
+p(reduce([1, 2, 3, 4, 5, 6], 0) { |total, v| total + v }) # => 21
 
-reduce(["This", "is", "my", "sentence"], "") { |sentence, word| sentence + " " + word } 
+p(reduce(["This", "is", "my", "sentence"], "") { |sentence, word| sentence + " " + word })
 # => "This is my sentence"
 
-reduce([6, 5, 9, 2, 1, 10, 3], Float::INFINITY) do |min, v|
+p(reduce([6, 5, 9, 2, 1, 10, 3], Float::INFINITY) do |min, v|
   if min > v
     v
   else
     min
   end
-end
+end)
 # => 1
