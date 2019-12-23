@@ -1,0 +1,29 @@
+<h1>Bill Splitter</h1>
+
+<%= form_with url:bill_path, local: true do |f| %>
+    <div>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+    </div>
+
+    <div>
+    <%= f.label :tax_percentage %>
+    <%= f.text_field :tax %>
+    </div>
+
+    <div>
+    <%= f.label :tip_percentage %>
+    <%= f.text_field :tip %>
+    </div>
+
+    <div>
+    <%= f.label :number_of_people %>
+    <%= f.text_field :number_of_people %>
+    </div>
+
+    <%= submit_tag 'Calculate'%>
+<% end %>
+
+<% if @payment %>
+<h3>Each person should pay $<%= @payment %></h3>
+<% end %>

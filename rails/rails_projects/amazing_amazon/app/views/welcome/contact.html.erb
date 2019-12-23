@@ -1,0 +1,16 @@
+<h1>Contact Us</h1>
+
+<div>
+    <%= form_with do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+</div>
+
+<div>
+    <%= f.label :message %>
+    <%= f.text_area :message %>
+</div>
+
+<%= submit_tag 'Send'%>
+
+<% end %>
