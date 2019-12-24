@@ -12,8 +12,11 @@
   <body>
     <nav>
       <%= link_to('Home', root_path) %>
+      <%= link_to('All Questions', questions_path) %>
+      <%= link_to('New Question', new_question_path) %>
       <%= link_to('Contact Us', contacts_new_path) %>
     </nav>
+    <%= flash[:notice] || flash[:alert]%>
     <%= yield %>
   </body>
 </html>

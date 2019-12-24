@@ -7,6 +7,7 @@ class Question < ApplicationRecord
     # It provides a bunch of methods to query the database
 
     # Rails HOOK
+    before_validation :default_view_count
     before_save :capitalize_title
     # Before saving a record, execute the method
 
@@ -42,6 +43,10 @@ class Question < ApplicationRecord
                 # 2) the error message
             self.errors.add(:body, "must not have monkeys")
         end
+    end
+
+    def default_view_count
+        self.view_count ||= 0
     end
 
 end
