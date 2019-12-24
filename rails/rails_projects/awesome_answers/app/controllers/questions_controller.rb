@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        @question = Question.new question_params
+
         if @question.save # perform validation and save if successful
             flash[:notice] = 'Question Created Successfully'
             redirect_to question_path(@question.id)
