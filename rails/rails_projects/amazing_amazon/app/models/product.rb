@@ -10,11 +10,16 @@ class Product < ApplicationRecord
 
     validates :price, numericality: {greater_than: 0}
 
-    # scope :search, ->(query) { where("title ILIKE ?" || "description ILIKE ?", "%#{query}%") }
-
-    def self.search query
-        where("title ILIKE ?" || "description ILIKE ?", "%#{query}%")
-    end
+    scope :search, lambda { |query|
+    where("title ILIKE '%#{query}%' OR description ILIKE '%#{query}%'")
+      .order(
+        # Order first by products whose titles that contain the `query`
+        "title ILIKE '%#{query}%' DESC",
+        # Then, if a product's title and description contain the `query`,
+        # put products whose descriptions also contain the `query` later in results
+        "description ILIKE '%#{query}%' ASC"
+      )
+  }
 
     private
 
