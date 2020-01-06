@@ -24,7 +24,18 @@ Rails.application.routes.draw do
 
   # get('/questions', to: 'questions#index')
 
-  resources :questions
+  # 'resources' method will generate all CRUD routes following RESTful
+  # conventions for a resource. It will assume there is a controller
+  # named after the first argument pluralized and PascalCased (i.e. QuestionsController)
+  resources :questions do
+    # Routes written inside of a block passed to 'resources' method will be
+    # prefixed by a path corresponding to the passed in symbol (:question)
+    # In this case, all nested routes will be prefixed with '/questions/:question_id'
+
+    resources :answers, only: [:create, :destroy]
+    # resources :answers, except [:new, :edit, :update, :index]
+  end
+
   get '/contacts/new', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
 

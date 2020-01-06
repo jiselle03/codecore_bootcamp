@@ -6,10 +6,38 @@ class Question < ApplicationRecord
     # ActiveRecord is an ORM
     # It provides a bunch of methods to query the database
 
-    # Rails HOOK
-    before_validation :default_view_count
-    before_save :capitalize_title
-    # Before saving a record, execute the method
+    has_many :answers, dependent: :destroy
+    # Adds the following instance methods to the question model:
+        # answers
+        # answers<<(object, ...)
+        # answers.delete(object, ...)
+        # answers.destroy(object, ...)
+        # answers=(objects)
+        # answers_singular_ids
+        # answers_singular_ids=(ids)
+        # answers.clear
+        # answers.empty?
+        # answers.size
+        # answers.find(...)
+        # answers.where(...)
+        # answers.exists?(...)
+        # answers.build(attributes = {}, ...)
+        # answers.create(attributes = {})
+        # answers.create!(attributes = {})
+        # answers.reload
+
+    # Adding 'dependent: :destroy' tells Rails to delete associated records before deleting
+    # the record itself. In this case, when a question is deleted, its 
+    # answers are deleted first to satisfy the forein_key constraint.
+
+    # You can also use 'dependent: :nullify' which will cause all 
+    # associated answers to have their question_id column set to NULL
+    # before the question is destroyed.
+
+    # If you don't set either 'dependent' option, you can end up with 
+    # answers in your db referencing question_ids that no longer exist,
+    # likely leading to errors. ALWAYS SET A DEPENDENT OPTION TO HELP
+    # MAINTAIN REFERENTIAL INTEGRITY.
 
     # Validations
     # Rails has built-in methods which allow us to create validations easily
@@ -26,6 +54,11 @@ class Question < ApplicationRecord
 
     # Custom validation
     validate(:no_monkey)
+
+    # Rails HOOK
+    before_validation :default_view_count
+    before_save :capitalize_title
+    # Before saving a record, execute the method
 
     private
 

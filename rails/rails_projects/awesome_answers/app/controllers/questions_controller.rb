@@ -33,7 +33,9 @@ class QuestionsController < ApplicationController
     end
 
     def show
-
+        @new_answer = Answer.new
+        @answers = @question.answers.order(created_at: :desc)
+        @question.update_columns(view_count: @question.view_count + 1)
     end
 
     def destroy
