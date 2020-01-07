@@ -1,8 +1,10 @@
 class AnswersController < ApplicationController
+    before_action :authenticate_user!
 
     def create
         @question = Question.find params[:question_id]
         @new_answer = Answer.new answer_params
+        @new_answer.user = current_user
         @new_answer.question = @question
 
         if @new_answer.save

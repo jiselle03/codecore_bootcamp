@@ -39,4 +39,9 @@ Rails.application.routes.draw do
   get '/contacts/new', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
 
+  resources :users, only: [:new, :create]
+
+  resource :session, only: [:new, :create, :destroy]
+  # CRUD on only one thing if singular resource (no id as part of URL)
+
 end

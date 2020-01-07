@@ -1,4 +1,6 @@
 class Question < ApplicationRecord
+    belongs_to :user
+    
     # Question model
     # Generated with command 'rails g model question title:string body:text'
     # Question class inherits everything from ApplicationRecord
