@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
 
+  has_many :reviews, dependent: :destroy
+
     before_validation :default_price
 
     before_save :capitalize_title

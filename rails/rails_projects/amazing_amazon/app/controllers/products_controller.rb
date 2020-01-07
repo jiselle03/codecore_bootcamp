@@ -33,7 +33,8 @@ class ProductsController < ApplicationController
     end
 
     def show
-
+        @new_review = Review.new
+        @reviews = @product.reviews.order(created_at: :desc)
     end
 
     def destroy

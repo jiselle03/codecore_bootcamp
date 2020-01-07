@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'about', to: 'welcome#about'
   get 'contact', to: 'welcome#contact'
 
-  resources :products
+  resources :products do
+    resources :reviews, only: [:create, :destroy]
+  end
 
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AmazingAmazon</title>
+    <title>Amazing Amazon</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,13 +11,32 @@
 
   <body>
   <nav>
-    <%= link_to 'Home', root_path %>
-    <%= link_to 'About', about_path %>
-    <%= link_to('All Products', products_path) %>
-    <%= link_to('New Product', new_product_path) %>
-    <%= link_to 'Contact', contact_path %>
-  </nav>
+
+      <ul class="nav justify-content-center bg-light">
+        
+        <h4>
+            <a class="navbar-brand d-flex w-50 mr-auto nav-link active" href="/">Blog on Rails</a>
+        </h4>
+        <li class="nav-item ml-auto justify-content-end">
+          <%= link_to 'Home', root_path %> &nbsp;
+        </li>
+        <li class="nav-item">
+          <%= link_to 'About', about_path %> &nbsp;
+        </li>
+        <li class="nav-item">
+          <%= link_to('All Products', products_path) %> &nbsp;
+        </li>
+        <li class="nav-item">
+          <%= link_to('New Product', new_product_path) %> &nbsp;
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Contact', contact_path %> &nbsp;
+        </li>
+      </ul>
+    </nav>
     <%= flash[:notice] || flash[:alert]%>
     <%= yield %>
   </body>
+
+      
 </html>
