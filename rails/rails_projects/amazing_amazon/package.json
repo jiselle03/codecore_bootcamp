@@ -7,6 +7,10 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2"
   },
+  "scripts": {
+    "publishheroku": "cd ../../../ && git subtree push --prefix rails/rails_projects/amazing_amazon heroku-amazing-amazon master || true",
+    "dbmigrateheroku": "heroku run rails db:migrate --app intense-headland-66967"
+  },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.10.1"
