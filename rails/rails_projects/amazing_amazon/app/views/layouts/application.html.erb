@@ -10,29 +10,61 @@
   </head>
 
   <body>
-  <nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbarSupportedContent">
 
-      <ul class="nav justify-content-center bg-light">
+      <ul class="navbar-nav mr-auto">
         
         <h4>
-            <a class="navbar-brand d-flex w-50 mr-auto nav-link active" href="/">Blog on Rails</a>
+            <a class="navbar-brand" href="/">Blog on Rails</a>
         </h4>
-        <li class="nav-item ml-auto justify-content-end">
-          <%= link_to 'Home', root_path %> &nbsp;
+        
+        <div class="collapse navbar-collapse">
+
+        <li class="nav-item <%= current_class?(root_path) %>">
+        <%= link_to "Home", root_path, class: "nav-link" %>
+        <% if current_page?(root_path) %>
+        <span class="sr-only">(current)</span>
+        <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to 'About', about_path %> &nbsp;
+        
+        <li class="nav-item <%= current_class?(about_path) %>">
+        <%= link_to "About", about_path, class: "nav-link" %>
+        <% if current_page?(about_path) %>
+          <span class="sr-only">(current)</span>
+        <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to('All Products', products_path) %> &nbsp;
+        
+        <li class="nav-item <%= current_class?(products_path) %>">
+        <%= link_to "All Products", products_path, class: "nav-link" %>
+        <% if current_page?(products_path) %>
+        <span class="sr-only">(current)</span>
+        <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to('New Product', new_product_path) %> &nbsp;
+      
+        <li class="nav-item <%= current_class?(new_product_path) %>">
+        <%= link_to "New Product", new_product_path, class: "nav-link" %>
+        <% if current_page?(new_product_path) %>
+        <span class="sr-only">(current)</span>
+        <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to 'Contact', contact_path %> &nbsp;
+        
+        <li class="nav-item <%= current_class?(contact_path) %>">
+        <%= link_to "Contact", contact_path, class: "nav-link" %>
+        <% if current_page?(contact_path) %>
+        <span class="sr-only">(current)</span>
+        <% end %>
         </li>
-      </ul>
+      
+        <% if user_signed_in? %>
+          <li class="nav-item">Hello, <%= current_user.full_name %> </li>
+          <li class="nav-item"> <%= link_to "Log Out", session_path, method: :delete, data: { confirm: "Are you sure you want to log out?" }, class: "nav-link" %> </li>
+        <% else %>
+          <li class="nav-item"> <%= link_to "Log In", new_session_path, class: "nav-link" %> &nbsp;</li>
+          <li class="nav-item"><%= link_to "Sign Up", new_user_path, class: "nav-link" %></li>
+        <% end %>
+
+  </div>
+    </ul>
     </nav>
     <%= flash[:notice] || flash[:alert]%>
     <%= yield %>

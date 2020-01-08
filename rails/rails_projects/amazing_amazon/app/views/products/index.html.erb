@@ -1,13 +1,14 @@
 <main class="container">
-<h2>All Products</h2>
-
+<br>
+<h3>All Products</h3>
+<br>
 <% @products.each do |product| %>
 
     <div>
         <h5><%= link_to(product.title, product_path(product.id)) %></h5>
         <p><%= product.description %></p>
         <p>$<%= number_with_precision(product.price, :precision => 2) %></p>
-        <p>Added <%= time_ago_in_words(product.created_at) %> ago</p>
+        <p>Added by <%= product.user.full_name %> <%= time_ago_in_words(product.created_at) %> ago</p>
     </div>
 <% end %>
 </main>

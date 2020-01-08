@@ -1,7 +1,10 @@
 class ReviewsController < ApplicationController
+    before_action :authenticate_user!
+    
     def create
         @product = Product.find params[:product_id]
         @new_review = Review.new review_params
+        @new_review.user = current_user
         @new_review.product = @product
 
         if @new_review.save
