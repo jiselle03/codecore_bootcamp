@@ -43,11 +43,7 @@ class ReviewsController < ApplicationController
     def toggle_hidden
         @review = Review.find params[:id]
 
-        if @review.is_hidden == true
-            @review.is_hidden = false
-        else
-            @review.is_hidden = true
-        end
+        @review.is_hidden == true ? @review.is_hidden = false : @review.is_hidden = true
 
         if @review.save
             flash[:notice] = 'Review updated Successfully'

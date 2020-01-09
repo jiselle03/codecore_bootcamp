@@ -50,26 +50,24 @@
     <% end %>
 
     <table>
-    <% one = 0 %>
-    <% two = 0 %>
-    <% three = 0 %>
-    <% four = 0 %>
-    <% five = 0 %>
+    <% one = 0 %><% two = 0 %><% three = 0 %><% four = 0 %><% five = 0 %>
     <% for i in 0...@reviews.count %>
-        <% if @reviews[i].rating == 1 %>
-            <% one += 1 %>
-        <% elsif @reviews[i].rating == 2 %>
-            <% two += 1 %>
-        <% elsif @reviews[i].rating == 3 %>
-            <% three += 1 %>
-        <% elsif @reviews[i].rating == 4 %>
-            <% four += 1 %>
-        <% elsif @reviews[i].rating == 5 %>
-            <% five += 1 %>
+        <% if @product.user == current_user || @reviews[i].is_hidden == false %>
+            <% if @reviews[i].rating == 1 %>
+                <% one += 1 %>
+            <% elsif @reviews[i].rating == 2 %>
+                <% two += 1 %>
+            <% elsif @reviews[i].rating == 3 %>
+                <% three += 1 %>
+            <% elsif @reviews[i].rating == 4 %>
+                <% four += 1 %>
+            <% elsif @reviews[i].rating == 5 %>
+                <% five += 1 %>
+            <% end %>
         <% end %>
     <% end %>
 
-<h5>Ratings (<%= @reviews.length %>)</h5>
+<h5>Ratings (<%= one + two + three + four + five %>)</h5>
 
     <tr><td>⭐</td><td><%= one %></td></tr>
     <tr><td>⭐⭐</td><td><%= two%></td></tr>
