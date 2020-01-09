@@ -85,7 +85,7 @@
         <% @reviews.each do |review| %>
 
         <% if review.is_hidden == false || current_user == @product.user %>
-        <li>
+        <li class="<%= 'hidden' if review.is_hidden == true %>">
             <%= review.body %> <br>
 
             Rating: <% review.rating.times { %> ⭐ <% }%>
@@ -97,24 +97,13 @@
                     edit_product_review_path(@product, review)
                 ) %>
             </small>
-            <% if review.is_hidden == false  && current_user == @product.user %>
             <small>
                 <%= link_to(
-                    "Hide",
+                "#{review.is_hidden ? 'Show' : 'Hide'}",
                     toggle_hidden_path(review),
                     method: :patch
                 ) %>
             </small>
-            <% elsif review.is_hidden == true %>
-            <small>
-                <%= link_to(
-                    "Unhide",
-                    toggle_hidden_path(review),
-                    method: :patch
-                ) %>
-            </small>
-            <% end %>
-
             <small>
                 <%= link_to(
                     "Delete",
