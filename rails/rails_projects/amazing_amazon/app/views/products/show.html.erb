@@ -5,8 +5,11 @@
 <p>$<%= number_with_precision(@product.price, :precision => 2) %></p>
 <small>Added by <%= @product.user.full_name %> <%= time_ago_in_words(@product.created_at) %> ago • Updated <%= time_ago_in_words(@product.updated_at) %> ago</small><br>
 <br>
-<%= link_to("Edit", edit_product_path(@product.id), :class => "btn btn-outline-primary") %>
-<%= link_to("Delete", product_path(@product), method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-outline-primary") %>
+<% if can? :crud, @product %>
+    <%= link_to("Edit", edit_product_path(@product.id), :class => "btn btn-outline-primary") %>
+    <%= link_to("Delete", product_path(@product), method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-outline-primary") %>
+<% end %>
+
 <br><br>
 <section>
     <h5>Leave a Review</h5>
@@ -39,8 +42,10 @@
     <hr>
     <% count = 0 %>
     <% for r in 0...@reviews.count %>
-        <% if @reviews[r].body != ""%>
-        <% count += 1 %>
+        <% if @reviews[r].body != ""  %>
+            <% if @product.user == current_user || @reviews[r].is_hidden == false %>
+                <% count += 1 %>
+            <% end %>
         <% end %>
     <% end %>
 
@@ -81,12 +86,37 @@
     <ul class="review-list">
         <% @reviews.each do |review| %>
 
-        <% if review.body != "" %>
+        <% if review.is_hidden == false || current_user == @product.user %>
         <li>
             <%= review.body %> <br>
 
             Rating: <% review.rating.times { %> ⭐ <% }%>
             <br>
+            <% if can? :crud, review %>
+            <small>
+                <%= link_to(
+                    "Edit",
+                    edit_product_review_path(@product, review)
+                ) %>
+            </small>
+            <% if review.is_hidden == false  && current_user == @product.user %>
+            <small>
+                <%= link_to(
+                    "Hide",
+                    toggle_hidden_path(review),
+                    method: :patch
+                ) %>
+            </small>
+            <% elsif review.is_hidden == true %>
+            <small>
+                <%= link_to(
+                    "Unhide",
+                    toggle_hidden_path(review),
+                    method: :patch
+                ) %>
+            </small>
+            <% end %>
+
             <small>
                 <%= link_to(
                     "Delete",
@@ -97,6 +127,7 @@
                     }
                 ) %>
             </small>
+            <% end %>
             <small>
                 Reviewed by <%= review.user.full_name %> <%= time_ago_in_words(review.created_at) %> ago
             </small>
@@ -105,6 +136,8 @@
         <% end %>
 
         <% end %>
+
+       
     </ul>
 </section>
 

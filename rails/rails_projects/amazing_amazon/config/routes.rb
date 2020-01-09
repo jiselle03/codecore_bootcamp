@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'about', to: 'welcome#about'
   get 'contact', to: 'welcome#contact'
+  patch '/reviews/:id/toggle', to: 'reviews#toggle_hidden', as: "toggle_hidden"
 
   resources :products do
-    resources :reviews, only: [:create, :destroy]
+    resources :reviews, only: [:create, :destroy, :edit, :update]
   end
 
   resources :users, only: [:new, :create]

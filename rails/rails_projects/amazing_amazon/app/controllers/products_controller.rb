@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :find_product, only: [:edit,:update,:show, :destroy]
+    before_action :authorize!, only: [:edit, :update, :destroy]
 
     def new
         @product = Product.new
@@ -53,6 +54,12 @@ class ProductsController < ApplicationController
     
     def product_params
         params.require(:product).permit(:title, :description, :price)
+    end
+
+    def authorize!
+        unless can?(:crud, @product)
+            redirect_to root_path, alert: 'Not Authorized'
+        end
     end
 
 end

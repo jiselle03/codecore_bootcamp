@@ -17,8 +17,45 @@ class ReviewsController < ApplicationController
 
     def destroy
         @review = Review.find params[:id]
-        @review.destroy
-        redirect_to product_path(@review.product)
+        if can? :crud, @review
+            @review.destroy
+            redirect_to product_path(@review.product)
+        else
+            redirect_to root_path, alert: 'Not Authorized'
+        end
+    end
+
+    def edit
+        @product = Product.find params[:id]
+        @review = Review.find params[:id]
+    end
+
+    def update
+        @review = Review.find params[:id]
+        if @review.update review_params
+            flash[:notice] = 'Review updated Successfully'
+            redirect_to product_path(@review.product)
+        else
+            render 'products/show'
+        end
+    end
+
+    def toggle_hidden
+        @review = Review.find params[:id]
+
+        if @review.is_hidden == true
+            @review.is_hidden = false
+        else
+            @review.is_hidden = true
+        end
+
+        if @review.save
+            flash[:notice] = 'Review updated Successfully'
+            redirect_to product_path(@review.product)
+        else
+            render 'products/show'
+        end
+
     end
 
     private
