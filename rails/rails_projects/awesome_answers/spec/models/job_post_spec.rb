@@ -35,7 +35,7 @@ RSpec.describe JobPost, type: :model do
     it("should require a unique title") do
       # GIVEN
       # One job post in the db and an instance of job post with the same title
-      persisted_jp = JobPost.create(title: "Software Developer")
+      persisted_jp = JobPost.create(title: "Software Developer", description: "cool job")
       jp = JobPost.new(title: persisted_jp.title)
 
       # WHEN
@@ -66,10 +66,12 @@ RSpec.describe JobPost, type: :model do
       # 3 job posts in the database
       job_post_a = JobPost.create(
         title: "Software Engineer",
+        description: "cool job",
         min_salary: 60_000
       )
       job_post_b = JobPost.create(
         title: "Programmer",
+        description: "cool job",
         min_salary: 50_000
       )
       job_post_c = JobPost.create(
