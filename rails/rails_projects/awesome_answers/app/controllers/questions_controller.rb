@@ -23,7 +23,6 @@ class QuestionsController < ApplicationController
     end
 
     def update
-        @question = Question.update question_params
         if @question.update question_params
             flash[:notice] = 'Question updated Successfully'
             redirect_to question_path(@question.id)
