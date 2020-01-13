@@ -203,7 +203,8 @@ RSpec.describe JobPostsController, type: :controller do
                 end
 
                 it 'does not remove a job post' do
-                    
+                    job_post = FactoryBot.create(:job_post)
+                    delete(:destroy, params: { id: job_post.id })
                     expect(JobPost.find_by(id: job_post.id)).to eq(job_post)
                 end
                 
