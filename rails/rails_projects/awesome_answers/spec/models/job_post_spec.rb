@@ -35,7 +35,7 @@ RSpec.describe JobPost, type: :model do
     it("should require a unique title") do
       # GIVEN
       # One job post in the db and an instance of job post with the same title
-      persisted_jp = JobPost.create(title: "Software Developer", description: "cool job")
+      persisted_jp = FactoryBot.create(:job_post)
       jp = JobPost.new(title: persisted_jp.title)
 
       # WHEN
@@ -64,21 +64,9 @@ RSpec.describe JobPost, type: :model do
     it("should return job posts containing the query statement ignoring letter casing") do
       # GIVEN
       # 3 job posts in the database
-      job_post_a = JobPost.create(
-        title: "Software Engineer",
-        description: "cool job",
-        min_salary: 60_000
-      )
-      job_post_b = JobPost.create(
-        title: "Programmer",
-        description: "cool job",
-        min_salary: 50_000
-      )
-      job_post_c = JobPost.create(
-        title: "Web Architect",
-        description: "develop software",
-        min_salary: 100_000
-      )
+      job_post_a = FactoryBot.create(:job_post, title: "Software Engineer")
+      job_post_b = FactoryBot.create(:job_post)
+      job_post_c = FactoryBot.create(:job_post, description: "Develop software")
 
       # WHEN
       # Searching for "software"

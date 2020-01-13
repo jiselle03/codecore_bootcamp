@@ -1,11 +1,14 @@
 class JobPostsController < ApplicationController
 
+    before_action :authenticate_user!, only: [:new, :create, :destroy]
+
     def new
         @job_post = JobPost.new
     end
 
     def create
         @job_post = JobPost.new job_post_params
+        @job_post.user = current_user
         if @job_post.save
         # redirect_to job_post_path(@job_post)
         # The above is equivalent to the below to redirect to job_posts show page
@@ -21,8 +24,14 @@ class JobPostsController < ApplicationController
 
     def destroy
         job_post = JobPost.find(params[:id])
-        job_post.destroy
-        redirect_to job_posts_path
+        
+        if can? :crud, job_post
+            job_post.destroy
+            redirect_to job_posts_path
+        else
+            flash[:danger] = "Access denied"
+            redirect_to job_post_path(job_post)
+        end
     end
 
     private

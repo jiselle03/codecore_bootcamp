@@ -43,6 +43,10 @@ class Ability
       answer.user == user || answer.question.user == user
     end
 
+    can(:crud, JobPost) do |job_post|
+      job_post.user == user
+    end
+    
     # Can also write abilities like:
     # can :manage, Question, user_id: user.id
 

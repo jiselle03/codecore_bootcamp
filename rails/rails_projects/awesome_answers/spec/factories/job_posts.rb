@@ -23,5 +23,13 @@ FactoryBot.define do
     min_salary { rand(20_001..100_000) }
     max_salary { rand(100_000..200_000) }
     company_name { Faker:: Company.name }
+
+    # The line below will create a user (using its factory) before creating a job post.
+    # It will then associate the job post with that user. This is necessary to pass validation
+    # added by 'belongs_to :user' in the JobPost model.
+    # association(:user, factory: user)
+    
+    # If the factory has the same name as the association, you can shorten this to:
+    user
   end
 end
