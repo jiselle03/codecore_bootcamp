@@ -1,5 +1,7 @@
 class NewsArticle < ApplicationRecord
 
+    belongs_to :user
+    
     before_save :titlelize_title
 
     validates :title, presence: true, uniqueness: true
@@ -10,7 +12,7 @@ class NewsArticle < ApplicationRecord
 
     def published_at_after_created_at
         return if created_at.blank? || published_at.blank?
-        if created_at < published_at
+        if created_at > published_at
             errors.add(:published_at, "must be after the created date") 
         end 
     end

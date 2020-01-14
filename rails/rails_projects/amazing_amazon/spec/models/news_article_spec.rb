@@ -11,7 +11,7 @@ RSpec.describe NewsArticle, type: :model do
     end
 
     it("should require a unique title") do
-      persisted_article = NewsArticle.create(title: "Coding Tips", description: "Learn Ruby")
+      persisted_article = FactoryBot.create(:news_article)
       article = NewsArticle.new(title: persisted_article.title)
       article.valid?
       expect(article.errors.messages[:title]).to(include('has already been taken'))
@@ -24,9 +24,10 @@ RSpec.describe NewsArticle, type: :model do
     end
 
     it("should have published at be after created at") do
-      news_article = NewsArticle.new(title: "Learn Coding", description: "Learn Ruby", published_at: "2017-08-08 00:00:00")
+      news_article = FactoryBot.create(:news_article)
+      news_article.published_at = "2017-08-08 00:00:00"
       news_article.valid?
-      expect(:published_at).to be >= :created_at
+      expect(news_article.errors.messages).to have_key(:published_at)
     end
 
   end

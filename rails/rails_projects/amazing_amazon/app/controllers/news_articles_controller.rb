@@ -1,6 +1,8 @@
 class NewsArticlesController < ApplicationController
 
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :find_news_article, only: [:edit, :update, :show, :destroy]
+    before_action :authorize!, except: [:index, :show]
 
     def new
         @news_article = NewsArticle.new
@@ -8,6 +10,8 @@ class NewsArticlesController < ApplicationController
 
     def create
         @news_article = NewsArticle.new news_article_params
+        @news_article.user = current_user
+
         if @news_article.save
             redirect_to @news_article
         else
@@ -46,6 +50,13 @@ class NewsArticlesController < ApplicationController
 
     def news_article_params
         params.require(:news_article).permit(:title, :description, :published_at, :view_count)
+    end
+
+    def authorize!
+        unless can? :crud, @news_article
+            flash[:danger] = "Access denied"
+            redirect_to news_article_path(@news_article)
+        end
     end
 
 end

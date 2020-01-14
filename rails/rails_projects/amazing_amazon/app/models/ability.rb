@@ -21,6 +21,10 @@ class Ability
       review.user == user || review.product.user == user
     end
 
+    can(:crud, NewsArticle) do |news_article|
+      news_article.user == user
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
