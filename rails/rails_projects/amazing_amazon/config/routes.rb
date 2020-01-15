@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   patch '/reviews/:id/toggle', to: 'reviews#toggle_hidden', as: "toggle_hidden"
 
   resources :products do
-    resources :reviews, only: [:create, :destroy, :edit, :update]
+    resources :favorites, shallow: true, only: [:create, :destroy]
+    get :favorited, on: :collection
+    resources :reviews, shallow: true, only: [:create, :destroy, :edit, :update] do
+      resources :likes, only: [:create, :destroy]
+    end
   end
 
   resources :users, only: [:new, :create]

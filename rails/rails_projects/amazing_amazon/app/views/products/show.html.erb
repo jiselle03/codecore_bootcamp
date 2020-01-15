@@ -1,6 +1,22 @@
 <main class="container">
 <p>&nbsp;</p>
-<h5><%= @product.title %></h5>
+<h5><%= @product.title %> 
+
+<% if @favorite.present? && can?(:destroy, @favorite) %>
+    <%= link_to(
+        icon('fas', 'bookmark'),
+        favorite_path(@favorite),
+        method: :delete
+    ) %>
+<% elsif can?(:favorite, @product) %>
+    <%= link_to(
+        icon('far', 'bookmark'),
+        product_favorites_path(@product),
+        method: :post
+    ) %>
+<% end %>
+</h5>
+
 <p><%= @product.description %></p>
 <p>$<%= number_with_precision(@product.price, :precision => 2) %></p>
 <small>Added by <%= @product.user.full_name %> <%= time_ago_in_words(@product.created_at) %> ago • Updated <%= time_ago_in_words(@product.updated_at) %> ago</small><br>
@@ -10,7 +26,7 @@
     <%= link_to("Delete", product_path(@product), method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-outline-primary") %>
 <% end %>
 
-<br><br>
+<br>
 <section>
     <h5>Leave a Review</h5>
 
@@ -90,34 +106,53 @@
 
             Rating: <% review.rating.times { %> ⭐ <% }%>
             <br>
+
             <% if can? :crud, review %>
+            <small>
+                Reviewed by <%= review.user.full_name %> <%= time_ago_in_words(review.created_at) %> ago
+            </small>
+
             <small>
                 <%= link_to(
                     "Edit",
-                    edit_product_review_path(@product, review)
-                ) %>
+                    edit_review_path(@product, review)
+                ) %> | 
             </small>
             <small>
                 <%= link_to(
                 "#{review.is_hidden ? 'Show' : 'Hide'}",
                     toggle_hidden_path(review),
                     method: :patch
-                ) %>
+                ) %> | 
             </small>
             <small>
                 <%= link_to(
                     "Delete",
-                    product_review_path(@product, review),
+                    review_path(@product, review),
                     method: :delete,
                     data: {
                         confirm: "Are you sure?"
                     }
-                ) %>
+                ) %> | 
             </small>
             <% end %>
+            
             <small>
-                Reviewed by <%= review.user.full_name %> <%= time_ago_in_words(review.created_at) %> ago
-            </small>
+            <% like = review.likes.find_by(user_id: current_user) %>
+            <% if like && can?(:destroy, like) %>
+                <%= link_to(
+                    "Unlike",
+                    like_path(like),
+                    method: :delete
+                ) %>
+            <% elsif can?(:like, review) %>
+                <%= link_to(
+                    "Like",
+                    review_likes_path(review),
+                    method: :post
+                ) %> | 
+            <% end %></small>
+            <small><%= pluralize(review.likes.count, "like") %></small>
             
         </li>
         <% end %>

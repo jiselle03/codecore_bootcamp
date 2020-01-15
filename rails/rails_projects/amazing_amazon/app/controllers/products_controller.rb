@@ -38,6 +38,7 @@ class ProductsController < ApplicationController
     def show
         @new_review = Review.new
         @reviews = @product.reviews.order(created_at: :desc)
+        @favorite = @product.favorites.find_by(user: current_user)
     end
 
     def destroy
@@ -45,6 +46,9 @@ class ProductsController < ApplicationController
         redirect_to products_path
     end
 
+    def favorited
+        @products = current_user.favorited_products.order('favorites.created_at DESC')
+    end
 
     private
 
