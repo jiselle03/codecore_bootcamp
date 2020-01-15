@@ -39,11 +39,16 @@ class QuestionsController < ApplicationController
         @new_answer = Answer.new
         @answers = @question.answers.order(created_at: :desc)
         @question.update_columns(view_count: @question.view_count + 1)
+        @like = @question.likes.find_by(user: current_user)
     end
 
     def destroy
         @question.destroy
         redirect_to questions_path
+    end
+
+    def liked
+        @questions = current_user.liked_questions.order('likes.created_at DESC')
     end
 
     private

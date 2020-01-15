@@ -46,6 +46,14 @@ class Ability
     can(:crud, JobPost) do |job_post|
       job_post.user == user
     end
+
+    can :like, Question do |question|
+      user.persisted? && question.user != user
+    end
+
+    can :destroy, Like do |like|
+      like.user = user
+    end
     
     # Can also write abilities like:
     # can :manage, Question, user_id: user.id

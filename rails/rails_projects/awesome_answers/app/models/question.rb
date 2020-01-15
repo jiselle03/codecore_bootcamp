@@ -9,6 +9,11 @@ class Question < ApplicationRecord
     # It provides a bunch of methods to query the database
 
     has_many :answers, dependent: :destroy
+    has_many :likes, dependent: :destroy
+    # The 'has_many' below is dependent on the existence of 'has_many :likes' above.
+    # If the above doesn't exist or comes after, you will get an error. 
+    has_many :likers, through: :likes, source: :user
+
     # Adds the following instance methods to the question model:
         # answers
         # answers<<(object, ...)

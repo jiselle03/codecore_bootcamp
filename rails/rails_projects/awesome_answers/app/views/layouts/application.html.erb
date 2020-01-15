@@ -18,13 +18,24 @@
       <%= link_to "Log In", new_session_path %> | 
       <%= link_to "Sign Up", new_user_path %> | 
     <% end %>
+    <%= link_to "Liked Questions", liked_questions_path %>
       <hr>
       <%= link_to('Home', root_path) %> | 
       <%= link_to('All Questions', questions_path) %> | 
       <%= link_to('New Question', new_question_path) %> | 
       <%= link_to('Contact Us', contacts_new_path) %>
     </nav>
-    <%= flash[:notice] || flash[:alert]%>
+    
+    <%#= flash[:notice] || flash[:alert]%>
+    <p>
+    <% flash.each do |type, message| %>
+      <div class="flash flash-<%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
+    </p>
+
     <%= yield %>
+    
   </body>
 </html>
