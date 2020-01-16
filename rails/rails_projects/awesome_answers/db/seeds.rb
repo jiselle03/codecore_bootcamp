@@ -7,7 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 PASSWORD = "supersecret"  
- 
+
+Tag.delete_all
+Like.delete_all
 Answer.delete_all 
 Question.delete_all 
 User.delete_all 
@@ -36,6 +38,14 @@ puts Cowsay.say("Created #{users.count} users", :tux)
  
 puts "Login with #{super_user.email} and password of '#{PASSWORD}'"
 
+20.times do
+    Tag.create(
+        name: Faker::Book.genre
+    )
+end
+
+tags = Tag.all
+
 200.times do
     user = users.sample 
     q = Question.create(
@@ -51,8 +61,12 @@ puts "Login with #{super_user.email} and password of '#{PASSWORD}'"
             user = users.sample
             Answer.new(body: Faker::GreekPhilosophers.quote, user_id: user.id)
         end
+        q.likers = users.shuffle.slice(0, rand(users.count))
+        q.tags = tags.shuffle.slice(0, rand(tags.count))
     end
 end
 
 puts Cowsay.say("Generated #{Question.count} questions", :frogs)
 puts Cowsay.say("Generated #{Answer.count} answers", :tux)
+puts Cowsay.say("Generated #{Like.count} likes", :dragon)
+puts Cowsay.say("Generated #{Tag.count} tags", :ghostbusters)

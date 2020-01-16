@@ -32,7 +32,12 @@ class QuestionsController < ApplicationController
     end
 
     def index
-        @questions = Question.all
+        if params[:tag]
+            @tag = Tag.find_or_initialize_by(name: params[:tag])
+            @questions = @tag.questions.order(created_at: :desc)
+        else
+            @questions = Question.all.order(created_at: :desc)
+        end
     end
 
     def show
@@ -58,7 +63,8 @@ class QuestionsController < ApplicationController
     end
     
     def question_params
-        params.require(:question).permit(:title, :body)
+        # params.require(:question).permit(:title, :body, tag_ids: [])
+        params.require(:question).permit(:title, :body, :tag_names)
     end
 
     def authorize!

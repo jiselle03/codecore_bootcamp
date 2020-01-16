@@ -11,8 +11,44 @@
 <div>
     <%= form.label :body %><br>
     <%= form.text_area :body, cols: 50, rows:5%>
-    <br>
-    <%= form.submit %>
+    
 </div>
 
+<div>
+    <%#= form.label :tag_ids, "Tags" %>
+    <%#= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |b| %>
+        <!-- <div class="tag-wrapper">
+            <%#= b.check_box %>
+            <%#= b.text.humanize %>
+        </div> -->
+    <%# end %>
+    <%= form.label :tag_names %>
+    <%= form.text_field :tag_names %>
+</div>
+
+<br>
+    <%= form.submit %>
+
 <% end %>
+
+<script>
+    // Documentation for selectize.js:
+    // https://selectize.github.io/selectize.js/
+    // For description of options that are usable go to:
+    // https://github.com/selectize/selectize.js/blob/master/docs/usage.md
+
+    $('#question_tag_names').selectize({
+        delimiter: ',',
+        persist: false,
+        labelField: "name",
+        valueField: "name",
+        searchField: "name",
+        options: <%= Tag.select(:name).to_json(except: [:id]).html_safe %>,
+        create: function(input) {
+            return {
+                name: input
+            }
+        }
+    });
+
+</script>
