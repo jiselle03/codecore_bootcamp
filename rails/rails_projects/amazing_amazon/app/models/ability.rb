@@ -30,7 +30,7 @@ class Ability
     end
 
     can :destroy, Like do |like|
-      like.user = user
+      like.user == user
     end
 
     can :favorite, Product do |product|
@@ -38,7 +38,15 @@ class Ability
     end
 
     can :destroy, Favorite do |favorite|
-      favorite.user = user
+      favorite.user == user
+    end
+
+    can :vote, Review do |review|
+      user.persisted? && review.user != user
+    end
+
+    can :crud, Vote do |vote|
+      vote.user == user
     end
 
   end

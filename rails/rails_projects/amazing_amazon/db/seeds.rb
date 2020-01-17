@@ -9,6 +9,8 @@
 Product.destroy_all()
 Review.destroy_all()
 User.destroy_all()
+Favorite.destroy_all()
+Tag.destroy_all()
 
 PASSWORD = "supersecret"  
 
@@ -32,11 +34,18 @@ super_user = User.create(
 end 
 
 users = User.all 
-puts Cowsay.say("Created #{users.count} users", :tux)  
- 
-puts "Login with #{super_user.email} and password of '#{PASSWORD}'"
+puts Cowsay.say("Created #{users.count} users.", :tux)  
+puts "Login with #{super_user.email} and password of '#{PASSWORD}'."
 
-1000.times do
+10.times do
+    Tag.create(
+        name: Faker::Movies::StarWars.planet
+    )
+end
+
+tags = Tag.all
+
+250.times do
     user = users.sample 
     p = Product.create(
         title: Faker::Commerce.product_name,
@@ -49,9 +58,12 @@ puts "Login with #{super_user.email} and password of '#{PASSWORD}'"
     if p.valid?
         p.reviews = rand(0..15).times.map do
             user = users.sample
-            Review.new(body: Faker::Movies::BackToTheFuture.quote, rating: Faker::Number.within(range: 1..5), user_id: user.id)
+            Review.new(body: Faker::Movies::StarWars.wookiee_sentence, rating: Faker::Number.within(range: 1..5), user_id: user.id)
         end
+        p.fans = users.shuffle.slice(0, rand(users.count))
+        p.tags = tags.shuffle.slice(0, rand(tags.count))
     end
 end
 
 puts Cowsay.say("Generated #{Product.count} products and #{Review.count} reviews.", :dragon)
+puts Cowsay.say("Generated #{Tag.count} tags.", :frogs)

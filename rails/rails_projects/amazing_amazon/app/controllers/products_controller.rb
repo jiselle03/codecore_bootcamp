@@ -32,7 +32,12 @@ class ProductsController < ApplicationController
     end
 
     def index
-        @products = Product.all
+        if params[:tag]
+            @tag = Tag.find_or_initialize_by(name: params[:tag])
+            @products = @tag.products.order(created_at: :desc)
+        else
+            @products = Product.all.order(created_at: :desc)
+        end
     end
 
     def show
@@ -57,7 +62,7 @@ class ProductsController < ApplicationController
     end
     
     def product_params
-        params.require(:product).permit(:title, :description, :price)
+        params.require(:product).permit(:title, :description, :price, :tag_names)
     end
 
     def authorize!

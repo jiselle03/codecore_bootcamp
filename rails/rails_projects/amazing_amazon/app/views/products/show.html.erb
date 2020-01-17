@@ -19,6 +19,15 @@
 
 <p><%= @product.description %></p>
 <p>$<%= number_with_precision(@product.price, :precision => 2) %></p>
+<% unless @product.tags.empty? %>
+<p>Tags: <% @product.tags.each do |tag| %>
+            <%= link_to(
+                tag.name, products_path(tag: tag.name),
+                class: 'badge badge-pill badge-primary'
+            ) %>
+        <% end %>
+</p>
+<% end %>
 <small>Added by <%= @product.user.full_name %> <%= time_ago_in_words(@product.created_at) %> ago • Updated <%= time_ago_in_words(@product.updated_at) %> ago</small><br>
 <br>
 <% if can? :crud, @product %>
@@ -26,7 +35,7 @@
     <%= link_to("Delete", product_path(@product), method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-outline-primary") %>
 <% end %>
 
-<br>
+<br><br>
 <section>
     <h5>Leave a Review</h5>
 
@@ -103,7 +112,75 @@
         <% if review.is_hidden == false || current_user == @product.user %>
         <li class="<%= 'hidden' if review.is_hidden == true %>">
             <%= review.body %> <br>
-
+            <small>Added by <%= review.user.full_name %> <%= time_ago_in_words(review.created_at) %> ago • Updated <%= time_ago_in_words(review.updated_at) %> ago</small><br>
+            <% vote = review.votes.find_by(user_id: current_user) %>
+            <% if vote && can?(:crud, vote) %>
+                <% if vote.is_up == true %>
+                    <%= link_to(
+                        icon('fas', 'thumbs-up'),
+                        vote_path(vote),
+                        method: :delete
+                    ) %> 
+                    <% count = 0%>
+                    <% review.votes.each do |vote| %>
+                        <% count += 1 if vote.is_up == true %>
+                    <% end %>
+                    <small>(<%= count%>)</small>
+                    <%= link_to(
+                        icon('far', 'thumbs-down'),
+                        vote_path(vote, is_up: false),
+                        method: :patch
+                    ) %> 
+                    <% count = 0%>
+                    <% review.votes.each do |vote| %>
+                        <% count += 1 if vote.is_up == false %>
+                    <% end %>
+                    <small>(<%= count %>)</small>
+                <% elsif vote.is_up == false %>
+                    <%= link_to(
+                        icon('far', 'thumbs-up'),
+                        vote_path(vote, is_up: true),
+                        method: :patch
+                    ) %> 
+                    <% count = 0%>
+                    <% review.votes.each do |vote| %>
+                        <% count += 1 if vote.is_up == true %>
+                    <% end %>
+                    <small>(<%= count %>)</small>
+                    <%= link_to(
+                        icon('fas', 'thumbs-down'),
+                        vote_path(vote),
+                        method: :delete
+                    ) %>
+                    <% count = 0%>
+                    <% review.votes.each do |vote| %>
+                        <% count += 1 if vote.is_up == false %>
+                    <% end %>
+                    <small>(<%= count %>)</small>
+                <% end %>
+            <% else %>
+                <%= link_to(
+                        icon('far', 'thumbs-up'),
+                        review_votes_path(review, is_up: true),
+                        method: :post
+                    ) %> 
+                    <% count = 0%>
+                    <% review.votes.each do |vote| %>
+                        <% count += 1 if vote.is_up == true %>
+                    <% end %>
+                    <small>(<%= count %>)</small>
+                    <%= link_to(
+                        icon('far', 'thumbs-down'),
+                        review_votes_path(review, is_up: false),
+                        method: :post
+                    ) %>
+                    <% count = 0%>
+                    <% review.votes.each do |vote| %>
+                        <% count += 1 if vote.is_up == false %>
+                    <% end %>
+                    <small>(<%= count %>)</small>
+            <% end %>
+            <br>
             Rating: <% review.rating.times { %> ⭐ <% }%>
             <br>
 

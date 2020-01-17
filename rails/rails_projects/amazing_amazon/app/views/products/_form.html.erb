@@ -15,8 +15,14 @@
 <div>
     <%= form.label :price %><br>
     <%= form.text_field :price %>
-    <br><br>
-    <%= form.submit "Submit", :class => "btn btn-outline-primary" %>
 </div>
+
+<div>
+    <%= form.label :tag_names, "Tags" %><br>
+    <%= form.text_field :tag_names %>
+</div>
+
+<br>
+<%= form.submit "Submit", :class => "btn btn-outline-primary" %>
 
 <% end %>

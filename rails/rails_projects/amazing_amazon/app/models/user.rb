@@ -7,6 +7,7 @@ class User < ApplicationRecord
     has_many :liked_reviews, through: :likes, source: :review
     has_many :favorites, dependent: :destroy
     has_many :favorited_products, through: :favorites, source: :product
+    has_many :votes, dependent: :destroy
 
     validates :first_name, presence: true
     validates :last_name, presence: true
