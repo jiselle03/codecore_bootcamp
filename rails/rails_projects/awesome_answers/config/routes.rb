@@ -59,6 +59,13 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   # CRUD on only one thing if singular resource (no id as part of URL)
 
-  resources :job_posts, only: [:new, :create, :show, :destroy, :index]
+  resources :job_posts
+
+  match(
+    "/delayed_job",
+    to: DelayedJobWeb,
+    anchor: false,
+    via: [:get, :post]
+  )
   
 end

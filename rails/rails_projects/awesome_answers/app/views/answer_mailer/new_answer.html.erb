@@ -1,0 +1,11 @@
+<p>Hello <%= @owner.full_name %>,</p>
+
+<p>Someone posted an answer to your question, "<%= @question.title %>".</p>
+
+<p>Here is their answer:</p>
+<p><%= @answer.body %></p>
+
+<%= link_to 'Click Here', "#{question_url(@question)}##{dom_id(@answer)}" %> to view the full question.
+
+<p>Thanks,</p>
+<p>The Awesome Answers Team</p>
