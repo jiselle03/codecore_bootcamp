@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'about', to: 'welcome#about'
 
-  resources :projects
+  resources :projects do
+    resources :tasks, shallow: true, only: [:create, :destroy, :update]
+  end
   
 end
