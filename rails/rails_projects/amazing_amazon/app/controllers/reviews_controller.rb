@@ -8,6 +8,7 @@ class ReviewsController < ApplicationController
         @new_review.product = @product
 
         if @new_review.save
+            ReviewMailer.new_review(@new_review).deliver_later(wait: 1.minute)
             redirect_to product_path(@product)
         else
             @reviews = @product.reviews.order(created_at: :desc)

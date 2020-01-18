@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
         @product = Product.new product_params
         @product.user = current_user
         if @product.save # perform validation and save if successful
+            ProductMailer.new_product(@product).deliver_later(wait: 1.minute)
             flash[:notice] = 'Product Added Successfully'
             redirect_to product_path(@product.id)
         else

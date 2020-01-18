@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
+require 'delayed/command'
+Delayed::Command.new(ARGV).daemonize
+
+# Set the --queue or --queues option to work from a particular queue.
+RAILS_ENV=production bin/delayed_job --queues=mailers,tasks start
+QUEUES=mailers,tasks rake jobs:work

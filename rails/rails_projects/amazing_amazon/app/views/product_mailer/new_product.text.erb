@@ -1,0 +1,8 @@
+Hello <%= @owner.full_name %>,
+
+Thank you for adding the product "<%= @product.title %>" to Amazing Amazon.
+
+Click Here <%= "#{product_url(@product)}##{dom_id(@product)}" %> to view product details.
+
+Thanks,
+The Amazing Amazon Team
