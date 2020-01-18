@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
-
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :find_project, except: [:new, :create, :index]
+    before_action :authorize!, only: [:edit, :update, :destroy]
 
     def new
         @project = Project.new
@@ -8,8 +9,9 @@ class ProjectsController < ApplicationController
 
     def create
         @project = Project.new project_params
+        @project.user = current_user
         if @project.save
-            flash[:notice] = 'ProjectAdded Successfully'
+            flash[:notice] = 'Project added successfully'
             redirect_to project_path(@project.id)
         else
             render :new
@@ -51,6 +53,12 @@ class ProjectsController < ApplicationController
     
     def project_params
         params.require(:project).permit(:title, :description, :due_date)
+    end
+
+    def authorize!
+        unless can?(:crud, @project)
+            redirect_to root_path, alert: 'Not Authorized'
+        end
     end
 
 end
