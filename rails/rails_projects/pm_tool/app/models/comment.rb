@@ -1,2 +1,2 @@
 class Comment < ApplicationRecord
-end
+    validates :body, presence: true
