@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
     before_action :authenticate_user!
+    before_action :find_task, only: [:edit, :update, :destroy]
+    before_action :authorize!, except: [:create]
 
     def create
         @project = Project.find params[:project_id]
@@ -7,7 +9,7 @@ class TasksController < ApplicationController
         @task.user = current_user
         @task.project = @project
 
-        if can?(:crud, @task)
+        if can? :create, @task
             if @task.save
                 redirect_to project_path(@project)
             else
@@ -15,24 +17,38 @@ class TasksController < ApplicationController
                 render 'projects/show'
             end
         else
-            redirect_to project_path(@project), alert: 'Not Authorized'
+            redirect_to project_path(@task.project), alert: 'Not Authorized'
         end
     end
 
     def destroy
-        if can?(:crud, @task)
-            @task = Task.find params[:id].destroy
-            @task.destroy
+        @task.destroy
+        redirect_to project_path(@task.project)
+    end
+
+    def update
+        if @task.update task_params
+            flash[:notice] = 'Task updated Successfully'
             redirect_to project_path(@task.project)
         else
-            redirect_to project_path(@project), alert: 'Not Authorized'
+            render 'projects/show'
         end
     end
 
     private
 
     def task_params
-        params.require(:task).permit(:body, :is_done, :due_date)
+        params.permit(:body, :due_date, :is_done)
+    end
+
+    def find_task
+        @task = Task.find params[:id]
+    end
+
+    def authorize!
+        unless can? :crud, @task
+            redirect_to project_path(@task.project), alert: 'Not Authorized'
+        end
     end
 
 end

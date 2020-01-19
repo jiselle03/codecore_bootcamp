@@ -57,7 +57,8 @@ class ProjectsController < ApplicationController
 
     def authorize!
         unless can?(:crud, @project)
-            redirect_to root_path, alert: 'Not Authorized'
+            redirect_to project_path(@project)
+            flash[:danger] = "Access denied"
         end
     end
 

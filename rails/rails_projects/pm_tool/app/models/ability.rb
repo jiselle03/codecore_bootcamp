@@ -18,7 +18,7 @@ class Ability
     end
 
     can(:crud, Task) do |task|
-      task.user == user || task.product.user == user
+      task.user == user || task.project.user == user
     end
 
   end
