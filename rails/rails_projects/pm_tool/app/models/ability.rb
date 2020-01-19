@@ -21,5 +21,13 @@ class Ability
       task.user == user || task.project.user == user
     end
 
+    can :favorite, Project do |project|
+      user.persisted? && project.user != user
+    end
+
+    can :destroy, Favorite do |favorite|
+      favorite.user == user
+    end
+
   end
 end

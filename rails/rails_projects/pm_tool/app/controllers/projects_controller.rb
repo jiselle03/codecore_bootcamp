@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
-    before_action :find_project, except: [:new, :create, :index]
+    before_action :find_project, except: [:new, :create, :index, :favorited]
     before_action :authorize!, only: [:edit, :update, :destroy]
 
     def new
@@ -38,11 +38,16 @@ class ProjectsController < ApplicationController
     def show
         @task = Task.new
         @tasks = @project.tasks.order(created_at: :desc)
+        @favorite = @project.favorites.find_by(user: current_user)
     end
 
     def destroy
         @project.destroy
         redirect_to projects_path
+    end
+
+    def favorited
+        @projects = current_user.favorited_projects.order('favorites.created_at DESC')
     end
 
     private

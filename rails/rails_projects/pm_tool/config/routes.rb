@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks, shallow: true, only: [:create, :destroy, :update]
+    resources :favorites, shallow: true, only: [:create, :destroy]
+    get :favorited, on: :collection
   end
 
   resources :users, only: [:new, :create]
