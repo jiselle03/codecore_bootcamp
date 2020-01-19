@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :favorites, shallow: true, only: [:create, :destroy]
     get :favorited, on: :collection
   end
+
+  get('/users/:id/password/edit', { to: 'users#edit_password', as: 'edit_password' })
+  patch('/users/:id/password/edit', { to: 'users#update_password', as: 'update_password'})
   
   get("/projects/:id/destroy", { to: "projects#destroy", as: :project_destroy })
   get("/projects/:project_id/tasks", { to: "tasks#create", as: :tasks_create })
