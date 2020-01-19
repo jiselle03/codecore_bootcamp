@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
     def create
         @project = Project.find params[:project_id]
-        @task = Task.new task_params
+        @task = Task.new params.require(:task).permit(:body, :due_date, :is_done)
         @task.user = current_user
         @task.project = @project
 
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
     end
 
     def update
-        if @task.update task_params
+        if @task.update params.permit(:body, :due_date, :is_done)
             flash[:notice] = 'Task updated Successfully'
             redirect_to project_path(@task.project)
         else
@@ -36,10 +36,6 @@ class TasksController < ApplicationController
     end
 
     private
-
-    def task_params
-        params.permit(:body, :due_date, :is_done)
-    end
 
     def find_task
         @task = Task.find params[:id]

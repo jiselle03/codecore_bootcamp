@@ -31,6 +31,7 @@ gem 'cancancan'
 
 # Bootstrap
 gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
 
 # FontAwesome
 gem 'font-awesome-sass', '~> 5.12.0'
