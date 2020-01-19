@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get("/projects/:project_id/favorites", { to: "favorites#create", as: :favorites_create })
   get("/favorites/:id", { to: "favorites#destroy", as: :favorites_destroy })
   
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :edit, :update]
   resource :session, only: [:new, :create, :destroy]
   
   get("/session/destroy", { to: "sessions#destroy", as: :session_destroy })

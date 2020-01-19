@@ -1,0 +1,19 @@
+.container {
+    margin: auto;
+  }
+  
+  .box {
+    margin: 2em 4em;
+    padding: 2em;
+    border: 1px solid lightgrey;
+    box-shadow: 5px 5px #888888;
+  }
+  
+  .box h3 {
+    text-align: center;
+  }
+  
+  .box .center {
+    margin: auto;
+    display:block;
+  }

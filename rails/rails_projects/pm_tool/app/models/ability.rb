@@ -21,6 +21,8 @@ class Ability
       task.user == user || task.project.user == user
     end
 
+    can :crud, User, :id => user.id
+
     can :favorite, Project do |project|
       user.persisted? && project.user != user
     end
