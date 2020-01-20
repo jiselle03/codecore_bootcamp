@@ -17,5 +17,12 @@ RSpec.describe Project, type: :model do
 
     end
 
+    it("should have a due date after created at") do
+      project = FactoryBot.create(:project)
+      project.due_date = "2017-08-08 00:00:00"
+      project.valid?
+      expect(project.errors.messages).to have_key(:due_date)
+    end
+
   end
 end
