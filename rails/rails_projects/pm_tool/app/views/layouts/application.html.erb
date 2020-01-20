@@ -14,11 +14,11 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbarSupportedContent">
 
       <ul class="navbar-nav mr-auto">
-        
+
         <h4>
             <a class="navbar-brand" href="/">PM Tool</a>
         </h4>
-        
+
         <div class="navbar-collapse">
 
         <li class="nav-item <%= current_class?(root_path) %>">
@@ -27,7 +27,7 @@
         <span class="sr-only">(current)</span>
         <% end %>
         </li>
-        
+
         <li class="nav-item <%= current_class?(about_path) %>">
         <%= link_to "About", about_path, class: "nav-link" %>
         <% if current_page?(about_path) %>
@@ -41,7 +41,7 @@
         <span class="sr-only">(current)</span>
         <% end %>
         </li>
-      
+
         <li class="nav-item <%= current_class?(new_project_path) %>">
         <%= link_to "New Project", new_project_path, class: "nav-link" %>
         <% if current_page?(new_project_path) %>
@@ -61,7 +61,7 @@
   </div>
     </ul>
     </nav>
-    
+
     <p>
     <% flash.each do |type, message| %>
       <div class="flash flash-<%= type %>">
