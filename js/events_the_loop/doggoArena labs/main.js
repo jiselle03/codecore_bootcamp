@@ -128,7 +128,6 @@ form.addEventListener("submit", event => {
 // the selected doggo in the process.
 
 document.addEventListener("keydown", event => {
-    console.log(event);
     const { ctrlKey, keyCode } = event;
     
     for (let i = 0; i < doggos.length; i++) {
