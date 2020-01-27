@@ -1,4 +1,6 @@
 class Api::V1::ProductsController < Api::ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
+    
     def create
         product = Product.new product_params
         product.user = current_user
