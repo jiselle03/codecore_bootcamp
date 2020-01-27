@@ -61,6 +61,20 @@ Rails.application.routes.draw do
 
   resources :job_posts
 
+  # The namespace method in Rails routes makes it so it will automatically
+  # look in a directory API, then in a directory v1 for QuestionsController.
+
+  # The option 'defaults: { format: :json }' will set 'json' as the default
+  # response for all routes.
+  namespace :api, defaults: { format: :json } do
+    # /api...
+    namespace :v1 do 
+      # /api/v1...
+      resources :questions
+      # /api/v1/questions
+    end
+  end
+
   match(
     "/delayed_job",
     to: DelayedJobWeb,
