@@ -25,7 +25,7 @@ class Api::V1::ProductsController < Api::ApplicationController
     private
 
     def product_params
-        params.require(:question).permit(:title, :description, :price)
+        params.require(:product).permit(:title, :description, :price)
     end
 
 end
