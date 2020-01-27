@@ -38,6 +38,10 @@ class QuestionsController < ApplicationController
         else
             @questions = Question.all.order(created_at: :desc)
         end
+        respond_to do |format|
+            format.html { render :index }
+            format.json { render json: @questions }
+        end
     end
 
     def show
@@ -45,6 +49,11 @@ class QuestionsController < ApplicationController
         @answers = @question.answers.order(created_at: :desc)
         @question.update_columns(view_count: @question.view_count + 1)
         @like = @question.likes.find_by(user: current_user)
+
+        respond_to do |format|
+            format.json { render json: @question }
+            # format.csv { render plain: 'blah, blah, blah'}
+        end
     end
 
     def destroy
