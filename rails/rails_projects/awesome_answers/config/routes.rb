@@ -72,6 +72,8 @@ Rails.application.routes.draw do
       # /api/v1...
       resources :questions
       # /api/v1/questions
+      resource :session, only: [:create, :destroy]
+      # /api/v1/session
     end
   end
 
