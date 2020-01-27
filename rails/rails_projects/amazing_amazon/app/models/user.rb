@@ -16,7 +16,7 @@ class User < ApplicationRecord
     has_secure_password
 
     def full_name
-        "#{first_name.titleize} #{last_name.titleize}"
+        "#{first_name.titleize} #{last_name.titleize}".strip.squeeze
     end
 
 end
