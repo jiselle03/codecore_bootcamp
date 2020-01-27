@@ -20,6 +20,12 @@ Rails.application.routes.draw do
 
   resources :news_articles
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do 
+      resources :products
+    end
+  end
+
   match(
     "/delayed_job",
     to: DelayedJobWeb,
