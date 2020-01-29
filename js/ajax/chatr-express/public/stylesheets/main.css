@@ -34,7 +34,7 @@ li {
   border-radius: 5px;
 }
 
-textarea {
+textarea, input {
   box-sizing: border-box;
   width: 100%;
   border: 2px solid #ddd;
@@ -60,4 +60,9 @@ input[type='submit'] {
   user-select: none;
   color: #ffffff;
   background-color: #18bc9c;
+}
+
+#flag-filter {
+  border-radius: 5px;
+  border: 1px solid black;
 }
