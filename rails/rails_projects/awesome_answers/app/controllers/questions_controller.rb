@@ -50,10 +50,10 @@ class QuestionsController < ApplicationController
         @question.update_columns(view_count: @question.view_count + 1)
         @like = @question.likes.find_by(user: current_user)
 
-        respond_to do |format|
-            format.json { render json: @question }
-            # format.csv { render plain: 'blah, blah, blah'}
-        end
+        # respond_to do |format|
+        #     format.json { render json: @question }
+        #     # format.csv { render plain: 'blah, blah, blah'}
+        # end
     end
 
     def destroy
