@@ -91,12 +91,19 @@ const updateQuestion = {
 // Delete a question
 // Question.destroy(205);
 
+
+// Listing single question
+// Add an event listener to questions container to grab the clicked question
+// Get the id of the question and send a get request to get the question
+// Navigate to question show and render the fetched question
+
 // Listing all questions on the page
 // 1. Add event listener to Questions link in navbar
 // 2. Handle navigation
 // 3. Fetch all questions when user clicks on Questions link in navigation bar
 // 4. Render the questions page with fetched questions
 
+// Render the questions page with fetched questions
 const renderQuestions = questions => {
     const questionsContainer = document.querySelector("div.question-list");
     const htmlString = questions.map(question => {
@@ -110,10 +117,10 @@ const renderQuestions = questions => {
     questionsContainer.innerHTML = htmlString;
 };
 
-// 3
+// Fetch all questions when user clicks on Questions link in navigation bar
 const refreshQuestions = () => Question.all().then(questions => renderQuestions(questions));
 
-// 2
+// Handle navigation 
 const navigateTo = (id, clickedLink) => {
     if (id === "question-index") {
         // Get all questions
@@ -135,16 +142,59 @@ const navigateTo = (id, clickedLink) => {
     };
 };
 
+// Render a single question on the page
+const renderQuestionDetails = question => {
+    const questionDetailsContainer = document.querySelector("#question-show");
+    const htmlString = `
+        <div class="ui segment question-show-container">
+            <div class="ui header">${question.title}</div>
+            <p>${question.body}</p>
+            <small>Asked by: ${question.author.full_name}</small>
+            <a class="ui orange button link" data-target="question-edit" data-id="${question.id}" href="">Edit</a>
+            <a class="ui red button link" data-target="question-delete" data-id="${question.id} href="">Delete</a>
+            <div class="ui segment">
+            <h3 class="ui horizontal divider">Answers</h3>
+                <ul class="ui relaxed divided list">
+                    ${question.answers
+                        .map(answer => `<div class="item">${answer.body}</div>`)
+                        .join("")}
+                </ul>
+            </div>
+        </div>
+    `;
+    questionDetailsContainer.innerHTML = htmlString;
+};
+
+// Getting a single question and navigate to question show page
+const getAndDisplayQuestion = id => {
+    Question.one(id).then(question => {
+        renderQuestionDetails(question);
+        navigateTo("question-show");
+    });
+};
+
+// Add event listener
 document.addEventListener("DOMContentLoaded", () => {
-    // 1
+    // to links in navbar
     document.querySelector(".navbar").addEventListener("click", event => {
         event.preventDefault();
         const link = event.target.closest("[data-target]");
         if (link) {
             event.preventDefault();
             const targetPage = link.getAttribute("data-target");
-            // 2
+            // Navigation
             navigateTo(targetPage, link);
+        }
+    });
+
+    // For questions container to get a single question
+    const questionsContainer = document. querySelector("div.question-list");
+    questionsContainer.addEventListener("click", event => {
+        const questionLink = event.target.closest("a.question-link");
+        if (questionLink) {
+            event.preventDefault();
+            const { id } = questionLink.dataset;
+            getAndDisplayQuestion(id);
         }
     });
 });
