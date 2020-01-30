@@ -83,6 +83,7 @@ const navigateTo = (id, clickedLink) => {
 
 // Event listener for navbar
 document.addEventListener("DOMContentLoaded", () => {
+    // Index
     document.querySelector(".navbar").addEventListener("click", event => {
         event.preventDefault();
         const link = event.target.closest("[data-target]");
@@ -90,6 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             const targetPage = link.getAttribute("data-target");
             navigateTo(targetPage, link);
+        }
+    });
+
+    // Show
+    const productsContainer = document. querySelector("div.product-list");
+    productsContainer.addEventListener("click", event => {
+        const productLink = event.target.closest("a.product-link");
+        if (productLink) {
+            event.preventDefault();
+            const { id } = productLink.dataset;
+            getAndDisplayProduct(id);
         }
     });
 });
@@ -110,5 +122,37 @@ const renderProducts = products => {
     productsContainer.innerHTML = htmlString;
 };
 
+// Render a single product on the page
+const renderProductDetails = product => {
+    const productDetailsContainer = document.querySelector("#product-show");
+    const htmlString = `
+        <div class="ui segment product-show-container">
+            <div class="ui header">${product.title}</div>
+            <p>${product.description}</p>
+            <p>$${product.price}</p>
+            <small>Added by: ${product.seller.full_name}</small>
+            <a class="ui small right floated orange button link" data-target="product-edit" data-id="${product.id}" href="">Edit</a>
+            <a class="ui small right floated red button link" data-target="product-delete" data-id="${product.id}" href ="">Delete</a>
+            <div class="ui segment">
+            <h3 class="ui horizontal divider">Reviews</h3>
+                <ul class="ui relaxed divided list">
+                    ${product.reviews
+                        .map(review => `<div class="item"><p>${review.body}</p><p>Rating: ${"⭐".repeat(review.rating)}</p></div>`)
+                        .join("")}
+                </ul>
+            </div>
+        </div>
+    `;
+    productDetailsContainer.innerHTML = htmlString;
+};
+
 // Fetch all products when Products link is clicked
 const refreshProducts = () => Product.all().then(products => renderProducts(products));
+
+// Get one product and navigate to show page
+const getAndDisplayProduct = id => {
+    Product.one(id).then(product => {
+        renderProductDetails(product);
+        navigateTo("product-show");
+    });
+};
