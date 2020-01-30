@@ -104,6 +104,61 @@ document.addEventListener("DOMContentLoaded", () => {
             getAndDisplayProduct(id);
         }
     });
+
+    // New
+    const newProductForm = document.querySelector("#new-product-form");
+    newProductForm.addEventListener("submit", event => {
+        event.preventDefault();
+        const fd = new FormData(event.currentTarget);
+        const newProduct = {
+            title: fd.get("title"),
+            description: fd.get("description"),
+            price: fd.get("price")
+        };
+
+        Product.create(newProduct).then(product => {
+            newProductForm.reset();
+            getAndDisplayProduct(product.id);
+        });
+    });
+
+    // Edit & Delete
+    document.querySelector("#product-show").addEventListener("click", event => {
+        const link = event.target.closest("[data-target]");
+        if (link) {
+            event.preventDefault();
+            const targetPage = link.getAttribute("data-target");
+            if (targetPage === "product-delete") {
+              // Delete
+              Product.destroy(link.getAttribute("data-id")).then(() => {
+                // Navigate to index
+                navigateTo("product-index");
+              });
+            } else {
+              // Populate product edit form
+              populateForm(link.getAttribute("data-id"));
+              // Navigate to edit page
+              navigateTo(targetPage);
+            }
+          }
+    });
+
+    const editProductForm = document.querySelector("#edit-product-form");
+    editProductForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const fd = new FormData(event.currentTarget);
+        const updatedProduct = {
+            title: fd.get("title"),
+            body: fd.get("body")
+        };
+
+        Product.update(fd.get("id"), updatedProduct).then(product => {
+            editProductForm.reset();
+            getAndDisplayProduct(product.id);
+        });
+    });
+
 });
 
 // Render Products
@@ -114,8 +169,7 @@ const renderProducts = products => {
             <a class="item product-link" data-id="${product.id}" href="">
                 <span>${product.id} - </span>
                 ${product.title} • 
-                ${product.description} • 
-                $${product.price}
+                $${(product.price).toFixed(2)}
             </a>
         `
     }).join("");
@@ -129,7 +183,7 @@ const renderProductDetails = product => {
         <div class="ui segment product-show-container">
             <div class="ui header">${product.title}</div>
             <p>${product.description}</p>
-            <p>$${product.price}</p>
+            <p>$${(product.price).toFixed(2)}</p>
             <small>Added by: ${product.seller.full_name}</small>
             <a class="ui small right floated orange button link" data-target="product-edit" data-id="${product.id}" href="">Edit</a>
             <a class="ui small right floated red button link" data-target="product-delete" data-id="${product.id}" href ="">Delete</a>
@@ -137,13 +191,23 @@ const renderProductDetails = product => {
             <h3 class="ui horizontal divider">Reviews</h3>
                 <ul class="ui relaxed divided list">
                     ${product.reviews
-                        .map(review => `<div class="item"><p>${review.body}</p><p>Rating: ${"⭐".repeat(review.rating)}</p></div>`)
+                        .map(review => `<div class="item"><p>${review.body}</p><p>Rating: ${"⭐".repeat(review.rating)}</p><small>Added by ${review.author.full_name}</small></div>`)
                         .join("")}
                 </ul>
             </div>
         </div>
     `;
     productDetailsContainer.innerHTML = htmlString;
+};
+
+// Populate Edit Form
+const populateForm = id => {
+    Product.one(id).then(product => {
+        document.querySelector('#edit-product-form [name="id"]').value = product.id;
+        document.querySelector('#edit-product-form [name="title"]').value = product.title;
+        document.querySelector('#edit-product-form [name="description"]').value = product.description;
+        document.querySelector('#edit-product-form [name="price"]').value = product.price;
+    });
 };
 
 // Fetch all products when Products link is clicked
