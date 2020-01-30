@@ -94,9 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Fetch all products when Products link is clicked
-const refreshProducts = () => Product.all().then(products => renderProducts(products));
-
 // Render Products
 const renderProducts = products => {
     const productsContainer = document.querySelector("div.product-list");
@@ -104,9 +101,14 @@ const renderProducts = products => {
         return `
             <a class="item product-link" data-id="${product.id}" href="">
                 <span>${product.id} - </span>
-                ${product.title}
+                ${product.title} • 
+                ${product.description} • 
+                $${product.price}
             </a>
         `
     }).join("");
     productsContainer.innerHTML = htmlString;
 };
+
+// Fetch all products when Products link is clicked
+const refreshProducts = () => Product.all().then(products => renderProducts(products));
