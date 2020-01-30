@@ -21,7 +21,7 @@ class Api::V1::ProductsController < Api::ApplicationController
     end
 
     def show
-        render json: @product
+        render json: @product, include: ['reviews.author']
     end
 
     def edit
