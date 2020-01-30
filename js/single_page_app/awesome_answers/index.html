@@ -58,16 +58,17 @@
             <section class="page" id="question-edit">
                 <div class="ui header">Edit Question</div>
                 <form class="ui form" id="edit-question-form">
-                    <div class="field">
-                      <label for="title">Title</label>
-                      <input type="text" name="title" id="title" placeholder="Enter question title">
+                  <input type="hidden" name="id" id="id">
+                  <div class="field">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                  </div>
+                  <div class="field">
+                      <label for="body">Body</label>
+                      <textarea name="body" id="body"rows="3"></textarea>
                     </div>
-                    <div class="field">
-                        <label for="body">Body</label>
-                        <textarea name="body" id="body" placeholder="Enter question body" rows="3"></textarea>
-                      </div>
-                    <button class="ui teal button" type="submit">Update Question</button>
-                  </form>
+                  <button class="ui teal button" type="submit">Update Question</button>
+                </form>
             </section>
         </div>
 
