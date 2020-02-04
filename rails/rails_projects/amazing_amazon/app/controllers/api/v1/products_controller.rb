@@ -44,7 +44,7 @@ class Api::V1::ProductsController < Api::ApplicationController
 
     def product_params
         params.require(:product).permit(:title, :description, :price)
-    end
+    endg
 
     def find_product
         @product = Product.find(params[:id])
