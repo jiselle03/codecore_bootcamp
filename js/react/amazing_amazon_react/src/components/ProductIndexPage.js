@@ -13,11 +13,14 @@ export class ProductIndexPage extends Component {
   render() {
     return (
       <main>
-        <h2>Products</h2>
-        <ul>
+        <h2 className="ui horizontal divider header">Products</h2>
+        <ul className="ui list">
           {data.map(product => (
-            <li key={product.id}>
-              <a href={`/products/${product.id}`}>{product.title}</a><br />
+            <li 
+              className="item"
+              key={product.id}>
+              <a className="ui header"
+                href={`/products/${product.id}`}>{product.title}</a><br />
               {product.description}<br />
               ${product.price}
             </li>

@@ -13,16 +13,21 @@ class ProductShowPage extends Component {
   };
 
   render() {
+    if(!this.state.product) {
+      return(
+        <div className="Page">
+          <h3 className="ui red header">Product does not exist.</h3>
+        </div>
+      );
+    };
+
     return (
       <div className="Page">
         <ProductDetails 
-          title="Small aluminum shoes"
-          description="We have no choice, General Calrissian! Our cruisers can't repel firepower of that magnitude!"
-          seller="Augustine Grimes"
-          price={49.24}
-          created_at="2020-01-06T00:00:00.000Z"
+          {...this.state.product}
         />
-        <ReviewList reviews={oneProductData.reviews} />
+        <ReviewList 
+        reviews={this.state.product.reviews} />
       </div>
     );
   };
