@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import NewQuestionForm from "./NewQuestionForm";
 import questionData from "../questionData";
 
 export class QuestionIndexPage extends Component {
@@ -32,20 +33,42 @@ export class QuestionIndexPage extends Component {
     });
   };
 
+  createQuestion = params => {
+    // Update the list of questions within our state by adding
+    // a new question to that list
+    this.setState(state => {
+      return {
+        questions: [
+          {
+            ...params,
+            id: Math.max(...state.questions.map(q => q.id)) + 1
+          },
+          ...state.questions
+        ]
+      };
+    });
+  };
+
   render() {
     return (
       <main>
-        <h2>Questions</h2>
+        <NewQuestionForm 
+          onCreateQuestion={this.createQuestion}
+        />
+        <h2 className="ui horizontal divider header">Questions</h2>
         <ul
+          className="ui list"
           style={{
             listStyle: "none",
             paddingLeft: 0
           }}
         >
           {this.state.questions.map(question => (
-            <li key={question.id} style={{ padding: "0.2em" }}>
-              <a href="">{question.title}</a> 
-              <button onClick={() => this.deleteQuestion(question.id)}>Delete</button>
+            <li className="item" key={question.id}>
+              <a className="ui header" href="">{question.title}</a> 
+              <button 
+                className="ui small right floated red button"
+                onClick={() => this.deleteQuestion(question.id)}>Delete</button>
             </li>
           ))}
         </ul>

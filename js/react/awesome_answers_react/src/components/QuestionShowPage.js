@@ -37,14 +37,16 @@ class QuestionShowPage extends Component {
     if(!this.state.question) {
       return (
         <div className="Page">
-          <h3 style={{color: "white", backgroundColor: "red"}}>Question does not exist.</h3>
+          <h3 className="ui red header">Question doesn't exist</h3>
         </div>
       );
     };
     return (
       <div className="Page">
         <QuestionDetails {...this.state.question} />
-        <button onClick={() => this.deleteQuestion()}>Delete</button>
+        <button 
+          className="ui small right floated red button"
+          onClick={() => this.deleteQuestion()}>Delete</button>
         <AnswerList 
           answers={this.state.question.answers} 
           onAnswerDeleteClick={id => this.deleteAnswer(id)}

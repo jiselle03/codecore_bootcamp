@@ -5,10 +5,10 @@ import { QuestionIndexPage } from "./QuestionIndexPage";
 
 const App = () => {
   return (
-    <>
-      <QuestionShowPage />
+    <div class="ui container">
       <QuestionIndexPage />
-    </>
+      <QuestionShowPage />
+    </div>
   );
 };
 
