@@ -4,16 +4,17 @@ import { ReviewDetails } from "./ReviewDetails";
 
 export const ReviewList = props => {
   return (
-    <ul>
-      {props.reviews.map(review => (
-        <ReviewDetails
-          key={review.id}
-          body={review.body}
-          rating={review.rating}
-          author={review.author}
-          created_at={new Date(review.created_at)}
-        />
-      ))}
-    </ul>
+    <>
+      <h2 className="ui horizontal divider header">Reviews</h2>
+      <ul className="ui list">
+        {props.reviews.map(review => (
+          <ReviewDetails
+            key={review.id}
+            {...review}
+            onDeleteClick={props.onReviewDeleteClick}
+          />
+        ))}
+      </ul>
+    </>
   );
 };

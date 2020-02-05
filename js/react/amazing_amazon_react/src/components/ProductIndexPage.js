@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import productData from "../productData";
 
 export class ProductIndexPage extends Component {
@@ -10,20 +9,32 @@ export class ProductIndexPage extends Component {
     };
   };
 
+  deleteProduct(id) {
+    this.setState(state => {
+      return {
+        products: state.products.filter(p => p.id !== id)
+      };
+    });
+  };
+
   render() {
     return (
       <main>
         <h2 className="ui horizontal divider header">Products</h2>
         <ul className="ui list">
-          {data.map(product => (
-            <li 
+          {this.state.products.map(product => (
+            <p 
               className="item"
               key={product.id}>
               <a className="ui header"
                 href={`/products/${product.id}`}>{product.title}</a><br />
               {product.description}<br />
               ${product.price}
-            </li>
+              <button
+                className="ui small right floated red button"
+                onClick={() => this.deleteProduct(product.id)}
+              >Delete</button>
+            </p>
           ))}
         </ul>
       </main>
