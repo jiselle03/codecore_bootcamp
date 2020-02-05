@@ -12,6 +12,26 @@ export class QuestionIndexPage extends Component {
       questions: [...questionData]
     };
   };
+
+  deleteQuestion(id) {
+    // To update state, always use 'setState(...)' method.
+    // You can use setState by passing an object to its first argument.
+    // When the time comes, the object will be merged with the current state.
+    // This will change whatever properties are within the current state.
+    // this.setState({
+    //   questions: this.state.questions.filter(q => q.id !== id)
+    // });
+
+    // You can also use setState by giving a callback as a first argument
+    // that receives the current state and props are arguments. It must
+    // return an object that will be merged with the state.
+    this.setState((state, props) => {
+      return {
+        questions: state.questions.filter(q => q.id !== id)
+      }
+    });
+  };
+
   render() {
     return (
       <main>
@@ -24,7 +44,8 @@ export class QuestionIndexPage extends Component {
         >
           {this.state.questions.map(question => (
             <li key={question.id} style={{ padding: "0.2em" }}>
-              <a href="">{question.title}</a>
+              <a href="">{question.title}</a> 
+              <button onClick={() => this.deleteQuestion(question.id)}>Delete</button>
             </li>
           ))}
         </ul>
