@@ -8,19 +8,21 @@ import oneQuestionData from "../oneQuestionData";
 // PascalCase is the naming convention for React components.
 // Components whose names do not begin with a capital letter will be interpreted as a plain HTML tag.
 
-const QuestionShowPage = () => {
+class QuestionShowPage extends Component {
+  render() {
     return (
-        <div className="Page">
-          <QuestionDetails
-            title="What is your favourite color?"
-            body="Red, Green, Magenta, etc."
-            author={{ full_name: "Michael Owen" }}
-            view_count={100}
-            created_at={new Date()}
-          />
-          <AnswerList answers={oneQuestionData.answers} />
-        </div>
-      );
+      <div className="Page">
+        <QuestionDetails
+          title="What is your favourite color?"
+          body="Red, Green, Magenta, etc."
+          author={{ full_name: "Michael Owen" }}
+          view_count={100}
+          created_at={new Date()}
+        />
+        <AnswerList answers={oneQuestionData.answers} />
+      </div>
+    );
+  };
 };
 
 // In JSX, self-closing tags must be closed. For example, you must write <img /> instead of <img>.
