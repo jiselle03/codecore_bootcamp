@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./css/QuestionShowPage.css"
 import { QuestionDetails } from "./QuestionDetails";
 import { AnswerList } from "./AnswerList";
