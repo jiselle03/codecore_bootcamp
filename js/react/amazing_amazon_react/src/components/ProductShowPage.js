@@ -19,16 +19,18 @@ class ProductShowPage extends Component {
   };
 
   deleteReview(id) {
+    const { product } = this.state;
     this.setState({
       product: {
-        ...this.state.product,
-        reviews: this.state.product.reviews.filter(r => r.id !== id)
+        ...product,
+        reviews: product.reviews.filter(r => r.id !== id)
       }
     });
   };
 
   render() {
-    if(!this.state.product) {
+    const { product } = this.state;
+    if(!product) {
       return(
         <div className="Page">
           <h3 className="ui red header">Product does not exist.</h3>
@@ -37,12 +39,18 @@ class ProductShowPage extends Component {
     };
 
     return (
-      <div className="Page">
+      <div 
+        style={{margin:"0 3em"}}
+        className="Page">
         <ProductDetails 
-          {...this.state.product}
+          {...product}
         />
+        <button
+          style={{margin:"1em 3em"}}
+          className="ui small right floated red button"
+          onClick={() => this.deleteProduct()}>Delete</button><br /><br />
         <ReviewList 
-        reviews={this.state.product.reviews}
+        reviews={product.reviews}
         onReviewDeleteClick={id => this.deleteReview(id)}
         />
       </div>
