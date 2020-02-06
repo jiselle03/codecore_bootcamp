@@ -38,7 +38,7 @@ export class ProductNewPage extends Component {
                 </div>
                 <div className="field">
                     <label htmlFor="price">Price</label>
-                    <textarea name="price" id="price" />
+                    <input type="number" min="0" step="0.01" name="price" id="price" />
                 </div>
                 <button className="ui orange button" type="submit">
                     Add Product
