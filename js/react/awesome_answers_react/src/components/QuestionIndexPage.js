@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-
 import NewQuestionForm from "./NewQuestionForm";
-import questionData from "../questionData";
+import { Question } from "../api/question";
 
 export class QuestionIndexPage extends Component {
   constructor(props) {
@@ -10,7 +9,7 @@ export class QuestionIndexPage extends Component {
       // This copies the questions array into a new array that is stored
       // in the state of this component, as the state's questions field
       // questions: questions.map(question => question)
-      questions: [...questionData]
+      questions: []
     };
   };
 
@@ -47,6 +46,10 @@ export class QuestionIndexPage extends Component {
         ]
       };
     });
+  };
+
+  componentDidMount() {
+    Question.all().then(questions => this.setState({ questions: questions }));
   };
 
   render() {

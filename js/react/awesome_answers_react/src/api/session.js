@@ -4,7 +4,7 @@ export const Session = {
     // Create a Session
     create(params) {
       // params is an object that represents a user
-      // { emal: 'someone@domain.com', password: 'supersecret' }
+      // { email: 'someone@domain.com', password: 'supersecret' }
       return fetch(`${baseUrl}/session`, {
         credentials: "include",
         method: "POST",
