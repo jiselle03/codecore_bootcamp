@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Product } from "../api/product";
 
 export class ProductNewPage extends Component {
-    createQuestion = event => {
+    createProduct = event => {
         event.preventDefault();
         const { currentTarget } = event;
         const fd = new FormData(currentTarget);
