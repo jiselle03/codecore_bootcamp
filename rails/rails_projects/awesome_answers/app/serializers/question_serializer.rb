@@ -3,7 +3,7 @@ class QuestionSerializer < ActiveModel::Serializer
   # to include in the serialization output. All columns of a model
   # have a corresponding attr_reader (getter) method, so we can filter
   # this way as well.
-  attributes :id, :title, :body, :created_at, :updated_at, :view_count, :like_count, :author
+  attributes :id, :title, :body, :created_at, :updated_at, :view_count, :like_count
 
   # To include associated models, use the same named methods for creating
   # associations. You can rename the association with the argument 'key:'
@@ -21,15 +21,11 @@ class QuestionSerializer < ActiveModel::Serializer
     object.likes.count
   end
 
-  def author
-    UserSerializer.new object.user
-  end
-
   # To customizer a serializer for associated models you can define a
   # serializer within the current serializer.
   class AnswerSerializer < ActiveModel::Serializer
     attributes :id, :body, :created_at, :updated_at
-    belongs_to(:user, key: :author)
+    belongs_to :user, key: :author
   end
 
 end
