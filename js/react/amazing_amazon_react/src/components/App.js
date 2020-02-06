@@ -1,9 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import ProductShowPage from "./ProductShowPage";
 import { ProductNewPage } from "./ProductNewPage";
 import { ProductIndexPage } from "./ProductIndexPage";
+import { WelcomePage } from "./WelcomePage";
+import { NavBar } from "./NavBar";
+import { Session } from "../api/session";
 
 class App extends Component {
   constructor(props) {

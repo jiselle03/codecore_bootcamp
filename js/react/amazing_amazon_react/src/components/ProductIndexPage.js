@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import productData from "../productData";
+import { Product } from "../api/product";
 
 export class ProductIndexPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [...productData]
+      products: []
     };
   };
 
@@ -17,10 +17,16 @@ export class ProductIndexPage extends Component {
     });
   };
 
+  componentDidMount() {
+    Product.all().then(products => this.setState({ products: products }));
+  };
+
   render() {
     return (
       <main>
-        <h2 className="ui horizontal divider header">Products</h2>
+        <h2
+          style={{margin:"1em"}} 
+          className="ui horizontal divider header">Products</h2>
         <ul className="ui list">
           {this.state.products.map(product => (
             <p 
