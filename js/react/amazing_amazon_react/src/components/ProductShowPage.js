@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import "./css/ProductShowPage.css"
 import { ProductDetails } from "./ProductDetails";
 import { ReviewList } from "./ReviewList";
-import oneProductData from "../oneProductData";
+import { Product } from "../api/product";
 
 class ProductShowPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: oneProductData
+      product: null
     }
   };
 
@@ -25,6 +25,12 @@ class ProductShowPage extends Component {
         ...product,
         reviews: product.reviews.filter(r => r.id !== id)
       }
+    });
+  };
+
+  componentDidMount() {
+    Product.one(this.props.match.params.id).then(product => {
+      this.setState({ product });
     });
   };
 
