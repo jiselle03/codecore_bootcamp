@@ -36,9 +36,9 @@ export class ProductIndexPage extends Component {
         <h2
           style={{margin:"1em"}} 
           className="ui horizontal divider header">Products</h2>
-        <ul className="ui list">
+        <div className="ui list">
           {this.state.products.map(product => (
-            <p 
+            <div
               className="item"
               key={product.id}>
             <h3 className="ui header"><Link to={`/products/${product.id}`} className="ui link" href="">
@@ -50,9 +50,9 @@ export class ProductIndexPage extends Component {
                 className="ui small right floated red button"
                 onClick={() => this.deleteProduct(product.id)}
               >Delete</button>
-            </p>
+            </div>
           ))}
-        </ul>
+        </div>
       </main>
     );
   };
