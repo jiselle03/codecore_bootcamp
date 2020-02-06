@@ -3,6 +3,7 @@ import "./css/QuestionShowPage.css"
 import { QuestionDetails } from "./QuestionDetails";
 import { AnswerList } from "./AnswerList";
 import { Question } from "../api/question";
+import { Spinner } from "./Spinner";
 
 // A React component is a function that returns a react element.
 // PascalCase is the naming convention for React components.
@@ -14,7 +15,8 @@ class QuestionShowPage extends Component {
     // call the 'Component' class constructor with 'super' pass it the 'props'.
     super(props);
     this.state = {
-      question: null
+      question: null,
+      isLoading: true
     };
   };
 
@@ -34,17 +36,26 @@ class QuestionShowPage extends Component {
   };
 
   componentDidMount() {
-    Question.one(28).then(question => {
-      this.setState({ question });
+    // All components that are rendered by a <Route> component (like QuestionShowPage) will be given
+    // props by that route component. One of these props is called "match", which contains information
+    // related to the pattern matched patch defined in App.js.
+    // <Route path="/questions/:id/:test/:something" component="{QuestionShowPage}" />
+    // match: {
+      // params: {
+        // id: <whatever-id>,
+        // test: <whatever-test>,
+        // something: <whatever-something> 
+      // } 
+    // }
+    Question.one(this.props.match.params.id).then(question => {
+      this.setState({ question, isLoading: false });
     });
   };
 
   render() {
     if(!this.state.question) {
       return (
-        <div className="Page">
-          <h3 className="ui red header">Question doesn't exist</h3>
-        </div>
+        <Spinner message="Question does not exist!" />
       );
     };
     return (

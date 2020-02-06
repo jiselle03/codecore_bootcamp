@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import NewQuestionForm from "./NewQuestionForm";
 import { Question } from "../api/question";
+import { Spinner } from "./Spinner";
 
 export class QuestionIndexPage extends Component {
   constructor(props) {
@@ -9,7 +11,8 @@ export class QuestionIndexPage extends Component {
       // This copies the questions array into a new array that is stored
       // in the state of this component, as the state's questions field
       // questions: questions.map(question => question)
-      questions: []
+      questions: [],
+      isLoading: true
     };
   };
 
@@ -49,10 +52,16 @@ export class QuestionIndexPage extends Component {
   };
 
   componentDidMount() {
-    Question.all().then(questions => this.setState({ questions: questions }));
+    Question.all().then(questions => this.setState({ questions: questions, isLoading: false }));
   };
 
   render() {
+    if(this.state.isLoading) {
+      return(
+        <Spinner message="Loading questions" />
+      );
+    };
+
     return (
       <main>
         <NewQuestionForm 
@@ -68,7 +77,9 @@ export class QuestionIndexPage extends Component {
         >
           {this.state.questions.map(question => (
             <li className="item" key={question.id}>
-              <a className="ui header" href="">{question.title}</a> 
+              <Link to={`/questions/${question.id}`} className="ui link" href="">
+                {question.title}
+              </Link>
               <button 
                 className="ui small right floated red button"
                 onClick={() => this.deleteQuestion(question.id)}>Delete</button>
