@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import NewQuestionForm from "./NewQuestionForm";
 import { Question } from "../api/question";
 import { Spinner } from "./Spinner";
 
@@ -35,22 +34,6 @@ export class QuestionIndexPage extends Component {
     });
   };
 
-  createQuestion = params => {
-    // Update the list of questions within our state by adding
-    // a new question to that list
-    this.setState(state => {
-      return {
-        questions: [
-          {
-            ...params,
-            id: Math.max(...state.questions.map(q => q.id)) + 1
-          },
-          ...state.questions
-        ]
-      };
-    });
-  };
-
   componentDidMount() {
     Question.all().then(questions => this.setState({ questions: questions, isLoading: false }));
   };
@@ -64,9 +47,6 @@ export class QuestionIndexPage extends Component {
 
     return (
       <main>
-        <NewQuestionForm 
-          onCreateQuestion={this.createQuestion}
-        />
         <h2 className="ui horizontal divider header">Questions</h2>
         <ul
           className="ui list"

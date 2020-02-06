@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import QuestionShowPage from "./QuestionShowPage";
+import { QuestionNewPage } from "./QuestionNewPage";
 import { QuestionIndexPage } from "./QuestionIndexPage";
 import { WelcomePage } from "./WelcomePage";
 import { NavBar } from "./NavBar";
@@ -34,9 +35,12 @@ class App extends Component {
           <header>
             <NavBar />
           </header>
-          <Route exact path="/" component={WelcomePage} />
-          <Route exact path="/questions" component={QuestionIndexPage} />
-          <Route exact path="/questions/:id" component={QuestionShowPage} />
+          <Switch>
+            <Route exact path="/" component={WelcomePage} />
+            <Route exact path="/questions" component={QuestionIndexPage} />
+            <Route exact path="/questions/new" component={QuestionNewPage} />
+            <Route exact path="/questions/:id" component={QuestionShowPage} />
+          </Switch>
         </div>
       </BrowserRouter>
     );
