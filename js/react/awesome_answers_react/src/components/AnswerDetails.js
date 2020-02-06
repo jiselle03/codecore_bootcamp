@@ -2,7 +2,7 @@ import React from "react";
 
 export const AnswerDetails = props => {
   return (
-    <div className="ui segment list">
+    <div className="ui segment list" style={{margin: "1em"}}>
       <p>
         {props.body} <br />
         By{" "}
