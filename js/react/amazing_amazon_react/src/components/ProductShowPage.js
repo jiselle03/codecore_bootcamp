@@ -3,12 +3,14 @@ import "./css/ProductShowPage.css"
 import { ProductDetails } from "./ProductDetails";
 import { ReviewList } from "./ReviewList";
 import { Product } from "../api/product";
+import { Spinner } from "./Spinner";
 
 class ProductShowPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: null
+      product: null,
+      isLoading: true
     }
   };
 
@@ -30,7 +32,7 @@ class ProductShowPage extends Component {
 
   componentDidMount() {
     Product.one(this.props.match.params.id).then(product => {
-      this.setState({ product });
+      this.setState({ product, isLoading: false });
     });
   };
 
@@ -38,9 +40,7 @@ class ProductShowPage extends Component {
     const { product } = this.state;
     if(!product) {
       return(
-        <div className="Page">
-          <h3 className="ui red header">Product does not exist.</h3>
-        </div>
+        <Spinner message="Product does not exist!" />
       );
     };
 

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Product } from "../api/product";
+import { Spinner } from "./Spinner";
 
 export class ProductIndexPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: [],
+      isLoading: true
     };
   };
 
@@ -18,10 +21,16 @@ export class ProductIndexPage extends Component {
   };
 
   componentDidMount() {
-    Product.all().then(products => this.setState({ products: products }));
+    Product.all().then(products => this.setState({ products: products, isLoading: false }));
   };
 
   render() {
+    if(this.state.isLoading) {
+      return(
+        <Spinner message="Loading products..." />
+      );
+    };
+
     return (
       <main>
         <h2
@@ -32,8 +41,9 @@ export class ProductIndexPage extends Component {
             <p 
               className="item"
               key={product.id}>
-              <a className="ui header"
-                href={`/products/${product.id}`}>{product.title}</a><br />
+            <h3 className="ui header"><Link to={`/products/${product.id}`} className="ui link" href="">
+              {product.title}
+            </Link></h3>
               {product.description}<br />
               ${product.price}
               <button
