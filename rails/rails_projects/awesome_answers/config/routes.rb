@@ -74,6 +74,11 @@ Rails.application.routes.draw do
       # /api/v1/questions
       resource :session, only: [:create, :destroy]
       # /api/v1/session
+      resources :users, only: [:create] do
+        # api/v1/users/current
+        get :current, on: :collection
+        # default
+      end
     end
   end
 
