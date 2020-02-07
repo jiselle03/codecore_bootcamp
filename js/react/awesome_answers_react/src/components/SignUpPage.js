@@ -29,7 +29,7 @@ export const SignUpPage = props => {
     return (
         <div className="ui clearing segment">
             <h1 className="ui center aligned header">Sign Up</h1>
-            <form className="ui large form" onSUbmit={handleSubmit}>
+            <form className="ui large form" onSubmit={handleSubmit}>
                 <div className="field">
                     <label htmlFor="first_name">First Name</label>
                     <input type="text" name="first_name" id="first_name" required />
