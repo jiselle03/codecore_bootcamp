@@ -6,7 +6,6 @@ import { QuestionNewPage } from "./QuestionNewPage";
 import { QuestionIndexPage } from "./QuestionIndexPage";
 import { WelcomePage } from "./WelcomePage";
 import { NavBar } from "./NavBar";
-import { Session } from "../api/session";
 import { SignInPage } from "./SignInPage"
 
 class App extends Component {
@@ -17,17 +16,17 @@ class App extends Component {
     };
   };
 
-  componentDidMount() {
+  // componentDidMount() {
     // This gives us back a cookie that represents us being logged in. Now, when we make POST
     // requests to the server to make a Question, we will be authenticated. This is a hacky method
     // until we learn about Authentication in React.
-    Session.create({
-      email: "js@winterfell.gov",
-      password: "supersecret"
-    }).then(user => {
-      this.setState({ currentUser: user });
-    });
-  };
+  //   Session.create({
+  //     email: "js@winterfell.gov",
+  //     password: "supersecret"
+  //   }).then(user => {
+  //     this.setState({ currentUser: user });
+  //   });
+  // };
 
   render() {
     return (
