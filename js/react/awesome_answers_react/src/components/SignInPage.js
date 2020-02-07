@@ -21,7 +21,7 @@ export class SignInPage extends Component {
             password: fd.get("password")
         }).then(data => {
             debugger;
-            if (data.status === 401) {
+            if (data.status === 404) {
                 this.setState({
                     errors: [{ message: "Wrong email or password" }]
                 });
