@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { NavLink } from "react-router-dom";
 import { Clock } from "./Clock";
 
@@ -22,7 +23,10 @@ export const NavBar = ({ currentUser, onSignOut }) => {
             {currentUser && (
                 <>
                     <div className="item">Hello, {currentUser.full_name}</div>
-                    <a href="" className="ui inverted red button" onClick={handleSignOutClick}>
+                    <a href="" 
+                        className="ui inverted red button" 
+                        onClick={handleSignOutClick}
+                    >
                         Sign Out
                     </a>
                 </>
