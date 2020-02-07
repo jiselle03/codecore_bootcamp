@@ -33,7 +33,7 @@ export class Clock extends Component {
 
     render() {
         return (
-            <div className="">
+            <div className="ui item">
                 {this.state.dateTime.toLocaleTimeString()}
             </div>
         );

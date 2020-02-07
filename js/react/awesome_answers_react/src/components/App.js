@@ -7,6 +7,7 @@ import { QuestionIndexPage } from "./QuestionIndexPage";
 import { WelcomePage } from "./WelcomePage";
 import { NavBar } from "./NavBar";
 import { Session } from "../api/session";
+import { SignInPage } from "./SignInPage"
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +40,8 @@ class App extends Component {
             <Route exact path="/" component={WelcomePage} />
             <Route exact path="/questions" component={QuestionIndexPage} />
             <Route exact path="/questions/new" component={QuestionNewPage} />
-            <Route exact path="/questions/:id" component={QuestionShowPage} />
+            <Route path="/questions/:id" component={QuestionShowPage} />
+            <Route path="/sign_in" component={SignInPage} />
           </Switch>
         </div>
       </BrowserRouter>

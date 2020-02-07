@@ -9,6 +9,7 @@ export const NavBar = props => {
             <NavLink exact to="/questions" className="item">Questions</NavLink>
             <NavLink exact to="/questions/new" className="item">Ask</NavLink>
             <div className="right menu">< Clock/></div>
+            <NavLink exact to="/sign_in" className="ui inverted orange button">Sign In</NavLink>
         </div>
     );
 };
