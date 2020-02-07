@@ -18,7 +18,10 @@ export const NavBar = ({ currentUser, onSignOut }) => {
             <NavLink exact to="/questions/new" className="item">Ask</NavLink>
             <div className="right menu">< Clock/></div>
             {!currentUser && (
-                <NavLink exact to="/sign_in" className="ui inverted orange button">Sign In</NavLink>
+                <>
+                    <NavLink exact to="/sign_in" className="ui black button">Sign In</NavLink>
+                    <NavLink exact to="/sign_up" className="ui black button">Sign Up</NavLink>
+                </>
             )}
             {currentUser && (
                 <>
