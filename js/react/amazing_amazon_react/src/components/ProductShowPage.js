@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import "./css/ProductShowPage.css"
 import { ProductDetails } from "./ProductDetails";
 import { ReviewList } from "./ReviewList";
@@ -14,13 +16,21 @@ class ProductShowPage extends Component {
     }
   };
 
-  deleteProduct(id) {
-    this.setState({
-      product: null
+  deleteProduct = id => {
+    Product.destroy(this.state.product.id).then(data => {
+      this.props.history.push("/products");
     });
   };
 
-  deleteReview(id) {
+  editProduct = (id, params) => {
+    Product.update(id, params).then(data => {
+      Product.one(this.props.match.params.id).then(product => {
+        this.setState({ product, isLoading: false });
+      });
+    });
+  };  
+
+  deleteReview = id => {
     const { product } = this.state;
     this.setState({
       product: {
@@ -52,9 +62,14 @@ class ProductShowPage extends Component {
           {...product}
         />
         <button
-          style={{margin:"1em 3em"}}
+          style={{margin:"0 3em"}}
           className="ui small right floated red button"
-          onClick={() => this.deleteProduct()}>Delete</button><br /><br />
+          onClick={() => this.deleteProduct()}>Delete</button>
+        
+        <Link exact to={`/products/${product.id}/edit`}><button
+          className="ui small right floated orange button"
+          >Edit</button></Link>
+        <br /><br />
         <ReviewList 
         reviews={product.reviews}
         onReviewDeleteClick={id => this.deleteReview(id)}

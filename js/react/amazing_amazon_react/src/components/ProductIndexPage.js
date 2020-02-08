@@ -12,13 +12,11 @@ export class ProductIndexPage extends Component {
     };
   };
 
-  deleteProduct(id) {
-    this.setState(state => {
-      return {
-        products: state.products.filter(p => p.id !== id)
-      };
-    });
-  };
+  // deleteProduct = id => {
+  //   Product.destroy(id).then(data => {
+  //     Product.all().then(products => this.setState({ products: products, isLoading: false }));
+  //   });
+  // };
 
   componentDidMount() {
     Product.all().then(products => this.setState({ products: products, isLoading: false }));
@@ -46,10 +44,10 @@ export class ProductIndexPage extends Component {
             </Link></h3>
               {product.description}<br />
               ${product.price}
-              <button
+              {/* <button
                 className="ui small right floated red button"
                 onClick={() => this.deleteProduct(product.id)}
-              >Delete</button>
+              >Delete</button> */}
             </div>
           ))}
         </div>
