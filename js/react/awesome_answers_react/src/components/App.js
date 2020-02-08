@@ -11,12 +11,14 @@ import { User } from "../api/user";
 import { Session } from "../api/session";
 import { AuthRoute } from "./AuthRoute";
 import { SignUpPage } from "./SignUpPage";
+import { Spinner } from "./Spinner";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null
+      currentUser: null,
+      isLoading: true
     };
 
     this.getUser = this.getUser.bind(this);
@@ -26,9 +28,9 @@ class App extends Component {
   getUser() {
     User.current().then(data => {
       if (typeof data.id !== "number") {
-        this.setState({ currentUser: null });
+        this.setState({ currentUser: null, isLoading: false });
       } else {
-        this.setState({ currentUser: data });
+        this.setState({ currentUser: data, isLoading: false });
       };
     });
   };
@@ -54,6 +56,12 @@ class App extends Component {
   // };
 
   render() {
+    if(this.state.isLoading) {
+      return(
+        <Spinner message="Authenticating user..." />
+      );
+    };
+      
     return (
       <BrowserRouter>
         <div className="ui container segment">
