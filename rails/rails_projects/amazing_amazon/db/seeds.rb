@@ -45,6 +45,8 @@ puts "Login with #{super_user.email} and password of '#{PASSWORD}'."
     )
 end
 
+puts Cowsay.say("Generated #{Tag.count} tags.", :tux)
+
 tags = Tag.all
 
 250.times do
@@ -81,8 +83,8 @@ tags = Tag.all
     end
 end
 
-puts Cowsay.say("Generated #{Product.count} products and #{Review.count} reviews.", :dragon)
+puts Cowsay.say("Generated #{Product.count} products.", :dragon)
+puts Cowsay.say("Generated #{Review.count} reviews.", :dragon)
 puts Cowsay.say("Generated #{Favorite.count} favorites.", :tux)
 puts Cowsay.say("Generated #{Like.count} likes.", :tux)
-puts Cowsay.say("Generated #{Tag.count} tags.", :tux)
 puts Cowsay.say("Generated #{Vote.count} votes.", :tux)
