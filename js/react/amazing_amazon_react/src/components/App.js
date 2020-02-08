@@ -46,7 +46,7 @@ class App extends Component {
       return(
         <Spinner message="Authenticating user..." />
       );
-  };
+    };
 
     return (
       <BrowserRouter>
