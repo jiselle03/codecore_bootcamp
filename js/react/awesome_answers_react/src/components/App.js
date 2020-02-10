@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import QuestionShowPage from "./QuestionShowPage";
@@ -13,36 +13,48 @@ import { AuthRoute } from "./AuthRoute";
 import { SignUpPage } from "./SignUpPage";
 import { Spinner } from "./Spinner";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentUser: null,
-      isLoading: true,
-      showTime: true
-    };
+const App = () => {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     currentUser: null,
+  //     isLoading: true,
+  //     showTime: true
+  //   };
 
-    this.getUser = this.getUser.bind(this);
-    this.destroySession = this.destroySession.bind(this);
-  };
+  //   this.getUser = this.getUser.bind(this);
+  //   this.destroySession = this.destroySession.bind(this);
+  // };
 
-  getUser() {
+  const [appState, setAppState] = useState({
+    currentUser: null,
+    isLoading: true,
+    showTime: true
+  });
+
+  const getUser = () => {
     User.current().then(data => {
       if (typeof data.id !== "number") {
-        this.setState({ currentUser: null, isLoading: false });
+        // this.setState({ currentUser: null, isLoading: false });
+        setAppState({...appState, currentUser: null, isLoading: false})
       } else {
-        this.setState({ currentUser: data, isLoading: false });
+        // this.setState({ currentUser: data, isLoading: false });
+        setAppState({...appState, currentUser: data, isLoading: false});
       };
     });
   };
 
-  destroySession() {
-    Session.destroy().then(this.setState({ currentUser: null }));
+  const destroySession = () => {
+    Session.destroy().then(setAppState({...appState, currentUser: null, isLoading: false}));
   };
 
-  componentDidMount() {
-    this.getUser();
-  };
+  // componentDidMount() {
+  //   this.getUser();
+  // };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   // componentDidMount() {
     // This gives us back a cookie that represents us being logged in. Now, when we make POST
@@ -56,10 +68,10 @@ class App extends Component {
   //   });
   // };
 
-  render() {
-    if(this.state.isLoading) {
+  // render() {
+    if(appState.isLoading) {
       return(
-        <Spinner message="Authenticating user..." />
+        <Spinner message="Loading..." />
       );
     };
       
@@ -68,9 +80,9 @@ class App extends Component {
         <div className="ui container segment">
           <header>
             <NavBar 
-              currentUser={this.state.currentUser} 
-              onSignOut={this.destroySession} 
-              showTime={this.state.showTime}
+              currentUser={appState.currentUser} 
+              onSignOut={destroySession} 
+              showTime={appState.showTime}
             />
           </header>
           <Switch>
@@ -78,33 +90,33 @@ class App extends Component {
             <Route exact path="/questions" component={QuestionIndexPage} />
             <AuthRoute 
             // !! turns a statement from truthy/falsy to true/false
-              isAuthenticated={!!this.state.currentUser}
+              isAuthenticated={!!appState.currentUser}
               component={QuestionNewPage}
               path = "/questions/new"
               exact
             />
             <AuthRoute 
-              isAuthenticated={!!this.state.currentUser}
+              isAuthenticated={!!appState.currentUser}
               component={QuestionShowPage}
               path="/questions/:id"
             />
             <Route 
               path="/sign_in"
               render={routeProps => (
-                <SignInPage {...routeProps} onSignIn={this.getUser} />
+                <SignInPage {...routeProps} onSignIn={getUser} />
               )}  
             />
             <Route 
               path="/sign_up"
               render={routeProps => (
-                <SignUpPage {...routeProps} onSignUp={this.getUser} />
+                <SignUpPage {...routeProps} onSignUp={getUser} />
               )}  
             />
           </Switch>
         </div>
       </BrowserRouter>
     );
-  };
+  // };
 };
 
 export default App;
