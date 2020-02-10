@@ -38,7 +38,7 @@ const reducer = (state, action) => {
   };
 };
 
-export const QuestionShowPage = props => {
+const QuestionShowPage = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // const [questionShow, setQuestionShow] = useState({
@@ -135,3 +135,5 @@ export const QuestionShowPage = props => {
 };
 
 // In JSX, self-closing tags must be closed. For example, you must write <img /> instead of <img>.
+
+export default React.memo(QuestionShowPage);

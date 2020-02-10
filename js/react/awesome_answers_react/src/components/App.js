@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { QuestionShowPage } from "./QuestionShowPage";
+import QuestionShowPage from "./QuestionShowPage";
 import { QuestionNewPage } from "./QuestionNewPage";
 import { QuestionIndexPage } from "./QuestionIndexPage";
 import { WelcomePage } from "./WelcomePage";
