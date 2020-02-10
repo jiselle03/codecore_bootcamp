@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import QuestionShowPage from "./QuestionShowPage";
@@ -32,7 +32,7 @@ const App = () => {
     showTime: true
   });
 
-  const getUser = () => {
+  const getUser = useCallback(() => {
     User.current().then(data => {
       if (typeof data.id !== "number") {
         // this.setState({ currentUser: null, isLoading: false });
@@ -42,7 +42,7 @@ const App = () => {
         setAppState({...appState, currentUser: data, isLoading: false});
       };
     });
-  };
+  }, [appState]);
 
   const destroySession = () => {
     Session.destroy().then(setAppState({...appState, currentUser: null, isLoading: false}));
@@ -54,7 +54,7 @@ const App = () => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [getUser]);
 
   // componentDidMount() {
     // This gives us back a cookie that represents us being logged in. Now, when we make POST
