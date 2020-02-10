@@ -18,7 +18,8 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: null,
-      isLoading: true
+      isLoading: true,
+      showTime: true
     };
 
     this.getUser = this.getUser.bind(this);
@@ -69,6 +70,7 @@ class App extends Component {
             <NavBar 
               currentUser={this.state.currentUser} 
               onSignOut={this.destroySession} 
+              showTime={this.state.showTime}
             />
           </header>
           <Switch>
