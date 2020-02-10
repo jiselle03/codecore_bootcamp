@@ -5,11 +5,13 @@ import { AnswerList } from "./AnswerList";
 import { Question } from "../api/question";
 import { Spinner } from "./Spinner";
 
+export const QuestionShowContext = React.createContext();
+
 // A React component is a function that returns a react element.
 // PascalCase is the naming convention for React components.
 // Components whose names do not begin with a capital letter will be interpreted as a plain HTML tag.
 
-const QuestionShowPage = props => {
+export const QuestionShowPage = props => {
   const [questionShow, setQuestionShow] = useState({
     question: null,
     isLoading: true  
@@ -83,6 +85,7 @@ const QuestionShowPage = props => {
         <button 
           className="ui small right floated red button"
           onClick={() => deleteQuestion()}>Delete</button>
+        <QuestionShowContext.Provider value={deleteAnswer} />
         <AnswerList 
           answers={questionShow.question.answers} 
           onAnswerDeleteClick={id => deleteAnswer(id)}
@@ -93,5 +96,3 @@ const QuestionShowPage = props => {
 };
 
 // In JSX, self-closing tags must be closed. For example, you must write <img /> instead of <img>.
-
-export default QuestionShowPage;
