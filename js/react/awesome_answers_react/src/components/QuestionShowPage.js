@@ -85,11 +85,13 @@ export const QuestionShowPage = props => {
         <button 
           className="ui small right floated red button"
           onClick={() => deleteQuestion()}>Delete</button>
-        <QuestionShowContext.Provider value={deleteAnswer} />
-        <AnswerList 
+        <QuestionShowContext.Provider value={deleteAnswer} >
+        {/* <AnswerList 
           answers={questionShow.question.answers} 
           onAnswerDeleteClick={id => deleteAnswer(id)}
-        />
+        /> */}
+        <AnswerList answers={questionShow.question.answers} />
+        </QuestionShowContext.Provider>
       </div>
     );
   // };
