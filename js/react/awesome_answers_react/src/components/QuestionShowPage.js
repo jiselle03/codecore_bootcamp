@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import "./css/QuestionShowPage.css"
 import { QuestionDetails } from "./QuestionDetails";
 import { AnswerList } from "./AnswerList";
@@ -11,11 +11,40 @@ export const QuestionShowContext = React.createContext();
 // PascalCase is the naming convention for React components.
 // Components whose names do not begin with a capital letter will be interpreted as a plain HTML tag.
 
+const initialState = {
+  question: null,
+  isLoading: true
+};
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'FETCH_QUESTION':
+      return {
+        question: action.payload,
+        isLoading: false
+      };
+
+    case 'DELETE_QUESTION':
+      return {
+        question: null,
+        isLoading: true
+      };
+    
+    case 'DELETE_ANSWER':
+      return {
+        ...state,
+        question: action.payload
+      };
+  };
+};
+
 export const QuestionShowPage = props => {
-  const [questionShow, setQuestionShow] = useState({
-    question: null,
-    isLoading: true  
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  // const [questionShow, setQuestionShow] = useState({
+  //   question: null,
+  //   isLoading: true  
+  // });
 
   const currentQuestionId = props.match.params.id;
 
@@ -29,8 +58,9 @@ export const QuestionShowPage = props => {
     // };
   // };
 
-  const deleteQuestion = id => {
-    Question.destroy(questionShow.question.id).then(data => {
+  const deleteQuestion = () => {
+    Question.destroy(state.question.id).then(data => {
+      dispatch({ type: 'DELETE_QUESTION' });
       props.history.push("/questions");
     });
   };
@@ -42,11 +72,17 @@ export const QuestionShowPage = props => {
     //     answers: this.state.question.answers.filter(a => a.id !== id)
     //   }
     // });
-    const newAnswers = questionShow.question.answers.filter(a => a.id !== id); 
-    setQuestionShow({
-      ...questionShow,
-      question: { ...questionShow.question, answers: newAnswers }
-    });
+    const newAnswers = state.question.answers.filter(a => a.id !== id); 
+    // setQuestionShow({
+    //   ...questionShow,
+    //   question: { ...questionShow.question, answers: newAnswers }
+    // });
+    const payload = {
+      ...state.question,
+      answer: newAnswers
+    };
+
+    dispatch({ type: 'DELETE_ANSWER', payload });
   };
 
   // componentDidMount() {
@@ -68,12 +104,13 @@ export const QuestionShowPage = props => {
 
   useEffect(() => {
     Question.one(currentQuestionId).then(question => {
-      setQuestionShow({ question, isLoading: false });
+      // setQuestionShow({ question, isLoading: false });
+      dispatch({ type: 'FETCH_QUESTION', payload: question })
     });
   }, [currentQuestionId]);
 
   // render() {
-    if(!questionShow.question) {
+    if(state.isLoading) {
       return (
         <Spinner message="Question does not exist!" />
       );
@@ -81,7 +118,7 @@ export const QuestionShowPage = props => {
     
     return (
       <div className="Page">
-        <QuestionDetails {...questionShow.question} />
+        <QuestionDetails {...state.question} />
         <button 
           className="ui small right floated red button"
           onClick={() => deleteQuestion()}>Delete</button>
@@ -90,7 +127,7 @@ export const QuestionShowPage = props => {
           answers={questionShow.question.answers} 
           onAnswerDeleteClick={id => deleteAnswer(id)}
         /> */}
-        <AnswerList answers={questionShow.question.answers} />
+        <AnswerList answers={state.question.answers} />
         </QuestionShowContext.Provider>
       </div>
     );
