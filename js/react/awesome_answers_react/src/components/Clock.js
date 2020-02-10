@@ -20,8 +20,8 @@ export const Clock = props => {
         return () => {
             // Whatever is happening here will happen when component is 
             // removed from DOM just like componentWillUnmount
-            clearInterval(this.intervalId)
-        }
+            clearInterval(intervalId);
+        };
     }, []);
 
     // state = {

@@ -15,6 +15,8 @@ const QuestionShowPage = props => {
     isLoading: true  
   });
 
+  const currentQuestionId = props.match.params.id;
+
   // constructor(props) {
     // When using a constructor in a class-based component, you must
     // call the 'Component' class constructor with 'super' pass it the 'props'.
@@ -63,10 +65,10 @@ const QuestionShowPage = props => {
   // };
 
   useEffect(() => {
-    Question.one(props.match.params.id).then(question => {
+    Question.one(currentQuestionId).then(question => {
       setQuestionShow({ question, isLoading: false });
     });
-  }, []);
+  }, [currentQuestionId]);
 
   // render() {
     if(!questionShow.question) {
@@ -83,7 +85,7 @@ const QuestionShowPage = props => {
           onClick={() => deleteQuestion()}>Delete</button>
         <AnswerList 
           answers={questionShow.question.answers} 
-          onAnswerDeleteClick={id => this.deleteAnswer(id)}
+          onAnswerDeleteClick={id => deleteAnswer(id)}
         />
       </div>
     );
