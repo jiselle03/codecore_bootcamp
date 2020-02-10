@@ -79,7 +79,7 @@ export const QuestionShowPage = props => {
     // });
     const payload = {
       ...state.question,
-      answer: newAnswers
+      answers: newAnswers
     };
 
     dispatch({ type: 'DELETE_ANSWER', payload });
