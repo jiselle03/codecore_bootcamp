@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+
 import { Star } from "./StarRating";
+import { ProductShowContext } from "./ProductShowPage";
 
 export const ReviewDetails = props => {
+  const deleteReview = useContext(ProductShowContext);
   const stars = [1, 2, 3, 4, 5];
   const { id, rating, body, created_at, author = {} } = props;
   const { full_name } = author;
@@ -16,7 +19,7 @@ export const ReviewDetails = props => {
         </small>
         <button
           class="ui small right floated red button"
-          onClick={() => props.onDeleteClick(id)}>Delete</button>
+          onClick={() => deleteReview(id)}>Delete</button>
       </p>
     </div>
   );

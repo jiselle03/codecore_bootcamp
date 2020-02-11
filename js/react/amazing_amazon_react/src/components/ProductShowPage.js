@@ -34,6 +34,8 @@ const reducer = (state, action) => {
   };
 };
 
+export const ProductShowContext = React.createContext();
+
 const ProductShowPage = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const currentProductId = props.match.params.id;
@@ -83,13 +85,11 @@ const ProductShowPage = props => {
         className="ui small right floated orange button"
         >Edit</button></Link>
       <br /><br />
-      <ReviewList 
-      reviews={state.product.reviews}
-      onReviewDeleteClick={id => deleteReview(id)}
-      />
+      <ProductShowContext.Provider value={deleteReview} >
+        <ReviewList reviews={state.product.reviews} />
+      </ProductShowContext.Provider>
     </div>
   );
-
 };
 
 export default ProductShowPage;

@@ -8,11 +8,7 @@ export const ReviewList = props => {
       <h2 className="ui horizontal divider header">Reviews</h2>
       <ul className="ui list">
         {props.reviews.map(review => (
-          <ReviewDetails
-            key={review.id}
-            {...review}
-            onDeleteClick={props.onReviewDeleteClick}
-          />
+          <ReviewDetails key={review.id} {...review} />
         ))}
       </ul>
     </>
