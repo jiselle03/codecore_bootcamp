@@ -27,6 +27,25 @@ module.exports = {
         filename: "[name].bundle.js"
     },
 
+    module: {
+        rules: [
+            {
+                test: /\.(.js|jsx)$/,
+                exclude: /node_modules/,
+                // Use 'exclude' with a regular expression to files that should be ignored
+                // by this loader. node_modules should always be ignored.
+                loader: "babel-loader"
+            },
+            {
+                test: /\.(png|jpg|gif|webp|svg)$/,
+                loader: "file-loader",
+                options: {
+                    outputPath: "images/"
+                }
+            }
+        ]
+    },
+
     plugins: [
         new HTMLWebpackPlugin({
             title: "Webpack Demo", // <title> of webpage
