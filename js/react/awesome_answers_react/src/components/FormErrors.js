@@ -3,10 +3,10 @@ import React from 'react';
 export const FormErrors = props => {
     const { forField, errors = [] } = props;
 
-    let filteredErrors = errors;
+    let filteredErrors = [];
 
-    if (forField) {
-        filteredErrors = errors.filter(error => error.field.toLowerCase() === forField.toLowerCase());
+    if (errors[forField]) {
+        filteredErrors = errors[forField].map(err => err);
     };
 
     if (filteredErrors.length < 1) {
@@ -14,9 +14,9 @@ export const FormErrors = props => {
     };
 
     return (
-        <ul>{filteredErrors.map((error, i) => {
-            <li className="item" key={i}>{`${error.field} ${error.message}`}</li>
-        })}
+        <ul>{errors[forField].map((error, i) => (
+            <li className="item" key={i}>{`${error}`}</li>
+        ))}
         </ul>
     )
 };

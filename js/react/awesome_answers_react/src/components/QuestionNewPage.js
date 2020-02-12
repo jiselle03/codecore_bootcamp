@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
-import { Question } from "../api/question";
+import React, { useState } from 'react';
 
-export class QuestionNewPage extends Component {
-    createQuestion = event => {
+import { Question } from "../api/question";
+import { FormErrors } from "./FormErrors";
+
+export const QuestionNewPage = props => {
+    const [errors, setErrors] = useState([]);
+
+    const createQuestion = event => {
         event.preventDefault();
         const { currentTarget } = event;
         const fd = new FormData(currentTarget);
@@ -19,31 +23,34 @@ export class QuestionNewPage extends Component {
                 // The 'history' prop is provided by the <Route /> component from react-router. It has
                 // a bunch of methods to manipulate the browser. You can use 'push' to direct a 
                 // user to any page in our app.
-                this.props.history.push(`/questions/${data.id}`);
+                props.history.push(`/questions/${data.id}`);
+                
+            } else {
+                setErrors(data.errors);
             };
         });
         
         currentTarget.reset();
     };
 
-    render() {
-        return (
-            <form 
-                className="NewQuestionForm ui form" 
-                onSubmit={event => this.createQuestion(event)}
-            >
-                <div className="field">
-                    <label htmlFor="title">Title</label>
-                    <input type="text" name="title" id="title" />
-                </div>
-                <div className="field">
-                    <label htmlFor="body">Body</label>
-                    <textarea name="body" id="body" />
-                </div>
-                <button className="ui orange button" type="submit">
-                    Create Question
-                </button>
-            </form>
-        );
-    };
+    return (
+        <form 
+            className="NewQuestionForm ui form" 
+            onSubmit={event => createQuestion(event)}
+        >
+            <div className="field">
+                <label htmlFor="title">Title</label>
+                <FormErrors errors={errors} forField="title" />
+                <input type="text" name="title" id="title" />
+            </div>
+            <div className="field">
+                <label htmlFor="body">Body</label>
+                <FormErrors errors={errors} forField="body" />
+                <textarea name="body" id="body" />
+            </div>
+            <button className="ui orange button" type="submit">
+                Create Question
+            </button>
+        </form>
+    );
 };
