@@ -27,26 +27,26 @@ const App = () => {
   //   this.destroySession = this.destroySession.bind(this);
   // };
 
-  const [appState, setAppState] = useState({
-    currentUser: null,
-    isLoading: true,
-    showTime: true
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [showTime] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getUser = useCallback(() => {
     User.current().then(data => {
       if (typeof data.id !== "number") {
         // this.setState({ currentUser: null, isLoading: false });
-        setAppState({...appState, currentUser: null, isLoading: false})
+        setCurrentUser(null);
+        setIsLoading(false);
       } else {
         // this.setState({ currentUser: data, isLoading: false });
-        setAppState({...appState, currentUser: data, isLoading: false});
+        setCurrentUser(data);
+        setIsLoading(false);
       };
     });
-  }, [appState]);
+  }, []);
 
   const destroySession = () => {
-    Session.destroy().then(setAppState({...appState, currentUser: null, isLoading: false}));
+    Session.destroy().then(currentUser(null));
   };
 
   // componentDidMount() {
@@ -70,7 +70,7 @@ const App = () => {
   // };
 
   // render() {
-    if(appState.isLoading) {
+    if(isLoading) {
       return(
         <Spinner message="Loading..." />
       );
@@ -81,9 +81,9 @@ const App = () => {
         <div className="ui container segment">
           <header>
             <NavBar 
-              currentUser={appState.currentUser} 
+              currentUser={currentUser} 
               onSignOut={destroySession} 
-              showTime={appState.showTime}
+              showTime={showTime}
             />
           </header>
           <Switch>
@@ -91,13 +91,13 @@ const App = () => {
             <Route exact path="/questions" component={QuestionIndexPage} />
             <AuthRoute 
             // !! turns a statement from truthy/falsy to true/false
-              isAuthenticated={!!appState.currentUser}
+              isAuthenticated={!!currentUser}
               component={QuestionNewPage}
               path = "/questions/new"
               exact
             />
             <AuthRoute 
-              isAuthenticated={!!appState.currentUser}
+              isAuthenticated={!!currentUser}
               component={QuestionShowPage}
               path="/questions/:id"
             />
