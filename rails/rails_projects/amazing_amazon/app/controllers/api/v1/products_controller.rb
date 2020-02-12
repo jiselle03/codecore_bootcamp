@@ -31,7 +31,10 @@ class Api::V1::ProductsController < Api::ApplicationController
         if @product.update product_params
             render json: { id: @product.id }
         else
-            render :edit
+            render(
+                json: { errors: question.errors },
+                status: 422 #unproceesable entity
+            )
         end
     end
 
