@@ -11,7 +11,7 @@ module.exports = {
     // entry: ["./src/index.js", "./src/client.js", "./src/default.js"]
 
     // To create multiple bundles from separate entry files, use an object
-    entry: "./src/index.js",
+    entry: "./src/client.js",
     // entry: {
         // Create a bundle "./dist/client.js" (will be named after the below key)
         // client: "./src/client.js",
@@ -49,7 +49,7 @@ module.exports = {
     plugins: [
         new HTMLWebpackPlugin({
             title: "Webpack Demo", // <title> of webpage
-            // chunks: ["main.bundle.js"]
+            chunks: ["client"]
             // 'chunks' tells webpack which bundles to include in the html file
         })
     ]

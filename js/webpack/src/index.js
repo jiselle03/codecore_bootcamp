@@ -1,10 +1,22 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import WebpackLogo from "./images/webpack_logo.png";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const img = document.createElement("img");
-    img.src = WebpackLogo;
+    const root = document.createElement("div");
+    document.body.append(root);
 
-    document.body.append(img);
+    ReactDOM.render(
+        <img 
+            style={{
+                borderRadius: "20px",
+                border: "3px solid grey"
+                }}
+            src={WebpackLogo}
+        />
+    );
+
 });
 
 
