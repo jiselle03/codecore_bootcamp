@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Product } from "../api/product";
-import { ProductForm } from "../ProductForm";
+import { ProductForm } from "./ProductForm";
 
 export const ProductNewPage = props => {
+    const [errors, setErrors] = useState([]);
+
     const createProduct = event => {
         event.preventDefault();
         const { currentTarget } = event;

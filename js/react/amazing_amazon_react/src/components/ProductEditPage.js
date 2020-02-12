@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Product } from "../api/product";
-import { Spinner } from "../Spinner";
-import { ProductForm } from "../ProductForm";
+import { Spinner } from "./Spinner";
+import { ProductForm } from "./ProductForm";
 
 export const ProductEditPage = props => {
     const [errors, setErrors] = useState([]);
     const [product, setProduct] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     
-    updateProduct = event => {
+    const updateProduct = event => {
         event.preventDefault();
         const { currentTarget } = event;
         const fd = new FormData(currentTarget);

@@ -20,7 +20,7 @@ export const ProductForm = props => {
             price: props.product.price
         };
     } else {
-        questionPlaceholder = {
+        productPlaceholder = {
             title: "Enter product title",
             description: "Enter product description",
             price: 0.00
@@ -34,7 +34,7 @@ export const ProductForm = props => {
         >
             <div className="field">
                 <label htmlFor="title">Title</label>
-                <FormErrors errors={errors} forField="title" />
+                <FormErrors errors={props.errors} forField="title" />
                 <input 
                     type="text" 
                     name="title"
@@ -45,25 +45,25 @@ export const ProductForm = props => {
             </div>
             <div className="field">
                 <label htmlFor="description">Description</label>
-                <FormErrors errors={errors} forField="description" />
+                <FormErrors errors={props.errors} forField="description" />
                 <textarea 
                     name="description" 
                     id="description" 
                     defaultValue={updateProduct.title} 
-                    placeholder={productPlaceholder.title} 
+                    placeholder={productPlaceholder.description} 
                 />
             </div>
             <div className="field">
                 <label htmlFor="price">Price</label>
-                <FormErrors errors={errors} forField="price" />
+                <FormErrors errors={props.errors} forField="price" />
                 <input 
                     type="number" 
                     min="0" 
                     step="0.01" 
                     name="price" 
                     id="price" 
-                    defaultValue={updateProduct.title} 
-                    placeholder={productPlaceholder.title} 
+                    defaultValue={updateProduct.price} 
+                    placeholder={productPlaceholder.price} 
                 />
             </div>
             <button className="ui orange button" type="submit">

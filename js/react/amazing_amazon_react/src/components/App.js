@@ -6,6 +6,7 @@ import { ProductNewPage } from "./ProductNewPage";
 import { ProductEditPage } from "./ProductEditPage";
 import { ProductIndexPage } from "./ProductIndexPage";
 import { WelcomePage } from "./WelcomePage";
+import { NotFoundPage } from "./NotFoundPage";
 import { NavBar } from "./NavBar";
 import { SignInPage } from "./SignInPage";
 import { User } from "../api/user";
@@ -84,6 +85,7 @@ class App extends Component {
                 <SignUpPage {...routeProps} onSignUp={this.getUser} />
               )}  
             />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </BrowserRouter>
