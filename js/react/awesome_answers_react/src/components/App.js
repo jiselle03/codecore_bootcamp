@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import QuestionShowPage from "./pages/QuestionShowPage";
 import { QuestionNewPage } from "./pages/QuestionNewPage";
+import { QuestionEditPage } from "./pages/QuestionEditPage";
 import { QuestionIndexPage } from "./pages/QuestionIndexPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import { SignInPage } from "./pages/SignInPage";
@@ -95,6 +96,11 @@ const App = () => {
               component={QuestionNewPage}
               path = "/questions/new"
               exact
+            />
+            <AuthRoute 
+              isAuthenticated={!!currentUser}
+              component={QuestionEditPage}
+              path="/questions/:id/edit"
             />
             <AuthRoute 
               isAuthenticated={!!currentUser}
