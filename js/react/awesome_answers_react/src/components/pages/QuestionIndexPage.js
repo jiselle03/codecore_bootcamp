@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Question } from "../api/question";
-import { Spinner } from "./Spinner";
+import { Question } from "../../api/question";
+import { Spinner } from "../Spinner";
 
 export const QuestionIndexPage = () => {
 
