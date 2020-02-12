@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Question } from "../../api/question";
-import { FormErrors } from "../FormErrors";
+import { QuestionForm } from "../QuestionForm";
 import { Spinner } from "../Spinner";
 
 export const QuestionEditPage = props => {
@@ -40,28 +40,11 @@ export const QuestionEditPage = props => {
     }
 
     return (
-        <form
-        className="NewQuestionForm ui form"
-        onSubmit={event => updateQuestion(event)}
-        >
-        <div className="field">
-            <label htmlFor="title">Title</label>
-            <FormErrors errors={errors} forField="title" />
-            <input
-            type="text"
-            name="title"
-            id="title"
-            defaultValue={question.title}
-            />
-        </div>
-        <div className="field">
-            <label htmlFor="body">Body</label>
-            <FormErrors errors={errors} forField="body" />
-            <textarea name="body" id="body" rows="3" defaultValue={question.body} />
-        </div>
-        <button className="ui orange button" type="submit">
-            Update Question
-        </button>
-        </form>
+        <QuestionForm 
+            errors={errors}
+            onUpdateQuestion={updateQuestion}
+            buttonMessage="Update Question"
+            question={question}
+        />
     );
 };
