@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Product } from "../api/product";
+import { ProductForm } from "../ProductForm";
 
 export const ProductNewPage = props => {
     const createProduct = event => {
@@ -24,25 +25,10 @@ export const ProductNewPage = props => {
     };
 
     return (
-        <form 
-            className="NewProductForm ui form" 
-            onSubmit={event => createProduct(event)}
-        >
-            <div className="field">
-                <label htmlFor="title">Title</label>
-                <input type="text" name="title" id="title" />
-            </div>
-            <div className="field">
-                <label htmlFor="description">Description</label>
-                <textarea name="description" id="description" />
-            </div>
-            <div className="field">
-                <label htmlFor="price">Price</label>
-                <input type="number" min="0" step="0.01" name="price" id="price" />
-            </div>
-            <button className="ui orange button" type="submit">
-                Add Product
-            </button>
-        </form>
+        <ProductForm 
+            errors={errors}
+            onCreateProduct={createProduct}
+            buttonMessage="Create Product"
+        />
     );
 };

@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Product } from "../api/product";
+import React, { useState } from 'react';
 
-export class ProductEditPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            product: {}
-        };
-    };
+import { Product } from "../api/product";
+import { Spinner } from "../Spinner";
+import { ProductForm } from "../ProductForm";
+
+export const ProductEditPage = props => {
+    const [errors, setErrors] = useState([]);
+    const [product, setProduct] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     
     updateProduct = event => {
         event.preventDefault();
@@ -20,66 +20,33 @@ export class ProductEditPage extends Component {
             price: fd.get("price")
         };
 
-        Product.update(this.props.match.params.id, updatedProduct).then(data => {
+        Product.update(props.match.params.id, updatedProduct).then(data => {
             if (!data.errors) {
-                this.props.history.push(`/products/${data.id}`);
+                props.history.push(`/products/${data.id}`);
+            } else {
+                setErrors(data.errors);
             };
         });
-        
-        currentTarget.reset();
+    
     };
 
-    handleChange = event => {
-        this.setState({
-            product: {...this.state.product, [event.target.name]: event.target.value} 
-        });
-    };
-
-    componentDidMount() {
-        Product.one(this.props.match.params.id).then(product => {
-            this.setState({ product, isLoading: false });
+    useEffect(() => {
+        Product.one(props.match.params.id).then(product => {
+            setProduct(product);
+            setIsLoading(false);
           });
-    };
+    }, [props.match.params.id]);
 
-    render() {
-        const { product } = this.state;
+    if (isLoading) {
+        return <Spinner message="Loading form..."/>;
+    }
 
-        return (
-            <form 
-                className="NewProductForm ui form" 
-                onSubmit={event => this.updateProduct(event)}
-            >
-                <div className="field">
-                    <label htmlFor="title">Title</label>
-                    <input 
-                        type="text" 
-                        name="title"
-                        id="title" 
-                        value={this.state.product.title} 
-                        onChange={this.handleChange} />
-                </div>
-                <div className="field">
-                    <label htmlFor="description">Description</label>
-                    <textarea 
-                        name="description" 
-                        id="description" 
-                        value={this.state.product.description} 
-                        onChange={this.handleChange} />
-                </div>
-                <div className="field">
-                    <label htmlFor="price">Price</label>
-                    <input 
-                        type="number" 
-                        min="0" 
-                        step="0.01" 
-                        name="price" 
-                        id="price" value={this.state.product.price} 
-                        onChange={this.handleChange} />
-                </div>
-                <button className="ui orange button" type="submit">
-                    Update Product
-                </button>
-            </form>
-        );
-    };
+    return (
+        <ProductForm 
+            errors={errors}
+            onUpdateProduct={updateProduct}
+            buttonMessage="Update Product"
+            product={product}
+        />
+    );
 };
