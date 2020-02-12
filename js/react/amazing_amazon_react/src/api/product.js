@@ -4,7 +4,7 @@ export const Product = {
     // Fetch all products
     all() {
         return fetch(`${baseUrl}/products`, {
-            credencials: "include"
+            credentials: "include"
         }).then(res => res.json());
     },
     // Fetch a single product
