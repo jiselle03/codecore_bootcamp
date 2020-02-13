@@ -12,6 +12,9 @@ class User < ApplicationRecord
     # Note: 'source' has to match a belongs_to association statement in the join model
     # ('like' in this case).
     has_many :liked_questions, through: :likes, source: :question
+    
+    has_many :sent_gifts, class_name: "Gift", foreign_key: :sender_id, dependent: :nullify
+    has_many :received_gifts, class_name: "Gift", foreign_key: :receiver_id, dependent: :nullify
 
     validates :email, presence: true, uniqueness: true,
     format: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i

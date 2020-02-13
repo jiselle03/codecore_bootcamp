@@ -7,9 +7,10 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 
-import 'bootstrap'
-import './questions'
-import './selectize'
+import 'bootstrap';
+import './questions';
+import './selectize';
+import './payment.js.rb';
 
 window.jQuery = $;
 window.$ = $;

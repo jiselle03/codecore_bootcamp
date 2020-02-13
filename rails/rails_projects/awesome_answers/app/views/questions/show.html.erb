@@ -1,7 +1,6 @@
 <h1>Question</h1>
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
-
 <% unless @question.tags.empty? %>
 <p>Tags: <% @question.tags.each do |tag| %>
             <%= link_to(
@@ -13,7 +12,7 @@
 <% end %>
 <%#= @question.tags.map{ |t| t.name }.join(", ") %>
 <%#= @question.tags.map(&:name).join(", ") %>
-<p>Asked by <%= @question.user.full_name %> <%= time_ago_in_words(@question.created_at) %> ago</p>
+<p>Asked by <%= link_to(@question.user&.full_name || 'DELETED', @question.user) %> <%= time_ago_in_words(@question.created_at) %> ago</p>
 <p>Last Edited <%= time_ago_in_words(@question.updated_at) %> ago</p>
 <small>Viewed <%= pluralize(@question.view_count, "time") %></small><br>
 <% if can? :crud, @question %>

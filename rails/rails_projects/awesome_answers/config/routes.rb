@@ -54,7 +54,15 @@ Rails.application.routes.draw do
   get '/contacts/new', to: 'contacts#new'
   post '/contacts', to: 'contacts#create'
 
-  resources :users, only: [:new, :create]
+  resources :users, shallow: true, only: [:new, :create, :show] do
+    # shallow:true will separate routes that require the parent from the ones that don't.
+    # Routes that require the parent (e.g. index, new, create) will not change.
+    # Routes that don't require the parent (e.g. show, edit, update, destroy) will have 
+    # the parent prefix removed (e.g. /users/:user_id)
+    resources :gifts, only: [:new, :create] do
+      resources :payments, only: [:new, :create]
+    end
+  end
 
   resource :session, only: [:new, :create, :destroy]
   # CRUD on only one thing if singular resource (no id as part of URL)
