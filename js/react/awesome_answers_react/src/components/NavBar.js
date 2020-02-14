@@ -25,7 +25,12 @@ export const NavBar = ({ currentUser, onSignOut, showTime }) => {
             )}
             {currentUser && (
                 <>
-                    <div className="item">Hello, {currentUser.full_name}</div>
+                    <div className="item">Hello, 
+                        <NavLink exact to={`/users/${currentUser.id}/edit`} >
+                        {currentUser.full_name}
+                        <img src={currentUser.avatar.url} className="ui small image" />
+                        </NavLink>
+                    </div>
                     <button
                         className="ui inverted red button" 
                         onClick={handleSignOutClick}

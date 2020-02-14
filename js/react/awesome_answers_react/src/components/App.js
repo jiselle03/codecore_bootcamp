@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import { UserEditPage } from "./pages/UserEditPage";
 import QuestionShowPage from "./pages/QuestionShowPage";
 import { QuestionNewPage } from "./pages/QuestionNewPage";
 import { QuestionEditPage } from "./pages/QuestionEditPage";
@@ -106,6 +107,13 @@ const App = () => {
               isAuthenticated={!!currentUser}
               component={QuestionShowPage}
               path="/questions/:id"
+            />
+            <AuthRoute 
+              isAuthenticated={!!currentUser}
+              render={routeProps => (
+                <UserEditPage {...routeProps} onUserUpdate={getUser} />
+              )}
+              path="/users/:id/edit"
             />
             <Route 
               path="/sign_in"
