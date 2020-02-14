@@ -23,7 +23,7 @@ class UserSerializer < ActiveModel::Serializer
   # end
 
   def avatar
-    attachment = object.avatars_attachment
+    attachment = object.avatar_attachment
       {
         id: attachment.id,
         name: attachment.name,
