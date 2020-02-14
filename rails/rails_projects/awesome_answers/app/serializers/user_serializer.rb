@@ -9,16 +9,27 @@ class UserSerializer < ActiveModel::Serializer
   # :avatars # for multiple
 
   # For multiple file uploads
-  def avatars
+  # def avatars
     # has_many_attached :avatars
     # object.avatars_attachments
-    object.avatars_attachments.includes(:blob).map do |attachment|
+    # object.avatars_attachments.includes(:blob).map do |attachment|
+    #   {
+    #     id: attachment.id,
+    #     name: attachment.name,
+    #     content_type: attachment.blob.filename.to_s,
+    #     url: rails_blob_url(attachment)
+    #   }
+    # end
+  # end
+
+  def avatar
+    attachment = object.avatars_attachment
       {
         id: attachment.id,
         name: attachment.name,
         content_type: attachment.blob.filename.to_s,
         url: rails_blob_url(attachment)
       }
-    end
   end
+
 end
