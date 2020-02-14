@@ -25,16 +25,31 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+
+# Authorization
 gem 'cancancan'
+
+# Bootstrap
 gem 'bootstrap', '~> 4.4.1'
+
+# Selectize
 gem 'selectize-rails'
+
+# Delayed Job
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+
+# Serializers
 gem 'active_model_serializers'
+
+# Rack CORS
 gem 'rack-cors'
 
 # Stripe
 gem 'stripe'
+
+# Simple Form
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
