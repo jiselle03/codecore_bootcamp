@@ -30,11 +30,40 @@ class User < ApplicationRecord
     after_validation :geocode
 
     validates :email, presence: true, uniqueness: true,
-    format: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+    format: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i, unless: :from_oauth?
     has_secure_password
 
     def full_name
         "#{first_name} #{last_name}".strip.squeeze
+    end
+
+    # Create the user
+    def self.create_from_oauth oauth_data
+        names = oauth_data["info"]["name"]&.split || oauth_data["info"]["nickname"]
+
+        self.create(
+            first_name: names[0],
+            last_name: names[1] || "",
+            uid: oauth_data["uid"],
+            provider: oauth_data["provider"],
+            oauth_raw_data: oauth_data,
+            password: SecureRandom.hex(32)
+        )
+    end
+
+    def self.find_from_oauth oauth_data
+        self.find_by(
+            uid: oauth_data["uid"],
+            provider: oauth_data["provider"]
+        )
+    end
+
+    serialize :oauth_raw_data
+
+    private
+
+    def from_oauth?
+        uid.present? && provider.present?
     end
 
 end

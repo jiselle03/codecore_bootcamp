@@ -67,6 +67,9 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   # CRUD on only one thing if singular resource (no id as part of URL)
 
+  get "/auth/github", as: :sign_in_with_github
+  get "/auth/:provider/callback", to: "callbacks#index"
+
   resources :job_posts
 
   # The namespace method in Rails routes makes it so it will automatically
