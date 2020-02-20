@@ -16,7 +16,8 @@ const card = elements.create("card", { style: style });
 
 document.addEventListener("DOMContentLoaded", () => {
     // Add an instance of the card element into the 'card-element' <div>
-    card.mount('#card-element');
+    if(!document.querySelector('#card-element')) { return }
+        card.mount("#card-element");
 
     card.addEventListener("change", function(event) {
         const displayError = document.getElementById("card-errors");

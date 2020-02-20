@@ -26,6 +26,9 @@ class User < ApplicationRecord
     # To support a single file attachment, do:
     has_one_attached :avatar    
 
+    geocoded_by :address
+    after_validation :geocode
+
     validates :email, presence: true, uniqueness: true,
     format: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
     has_secure_password
