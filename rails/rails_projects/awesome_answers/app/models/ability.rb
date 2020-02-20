@@ -54,6 +54,10 @@ class Ability
     can :destroy, Like do |like|
       like.user = user
     end
+
+    can :publish, Question do |quesiton|
+      question.user == user
+    end
     
     # Can also write abilities like:
     # can :manage, Question, user_id: user.id

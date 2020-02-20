@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     # 'on: :member' means that it acts on a single resource. A single question in this case.
     # Edit, update, destroy, show are member routes (e.g. /question/:id/liked)
     get :liked, on: :collection
+    resources :publishings, only: :create
   end
 
   get '/contacts/new', to: 'contacts#new'
